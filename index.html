@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>G Vision — International Real Estate Advisory</title>
-<meta name="description" content="Personalized real estate advisory and investment guidance across international markets. Expertise, trust, and full-service support from search to closing.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>G Vision — Real Estate Advisory</title>
+<meta name="description" content="G Vision is a personal real estate advisory practice guiding clients through property search, investment, and cross-border transactions with expertise and care." />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -16,739 +16,672 @@
     theme: {
       extend: {
         colors: {
-          bg: '#FAF8F3',
-          bgalt: '#F1ECE0',
+          bg: '#FFFFFF',
+          bgalt: '#F6F4EF',
           surface: '#FFFFFF',
-          ink: '#15171C',
-          inksoft: '#54514A',
-          muted: '#928C7E',
-          line: '#E5DECE',
-          accent: '#A9793E',
-          accentdark: '#7E5B2C',
-          accentlight: '#EFE3CE',
+          ink: '#17140F',
+          inksoft: '#433C33',
+          muted: '#8A7F6F',
+          line: '#E6DFD3',
+          accent: '#A9762F',
+          accentdark: '#7C5722',
+          accentlight: '#F1E4C8',
         },
         fontFamily: {
-          display: ['"Fraunces"', 'ui-serif', 'Georgia', 'serif'],
-          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          display: ['Fraunces', 'serif'],
+          sans: ['Inter', 'sans-serif'],
         },
-        maxWidth: { '8xl': '90rem' },
-      }
-    }
+      },
+    },
   }
 </script>
 
 <style>
   html { scroll-behavior: smooth; }
-  body { background-color: #FAF8F3; }
+  body { background-color: #FFFFFF; }
 
-  .shadow-soft { box-shadow: 0 1px 2px rgba(21,23,28,.05), 0 10px 30px -10px rgba(169,121,62,.20); }
-  .shadow-elevated { box-shadow: 0 2px 4px rgba(21,23,28,.06), 0 24px 48px -12px rgba(21,23,28,.18), 0 12px 24px -8px rgba(169,121,62,.14); }
-  .shadow-dark { box-shadow: 0 20px 60px -20px rgba(0,0,0,.55); }
+  /* Grain / noise texture for dark sections */
+  .grain { position: relative; isolation: isolate; }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    z-index: 1;
+  }
 
-  .text-balance { text-wrap: balance; }
+  /* Soft card shadows */
+  .shadow-soft { box-shadow: 0 1px 2px rgba(23,20,15,0.04), 0 12px 32px -12px rgba(23,20,15,0.14); }
+  .shadow-soft-lg { box-shadow: 0 4px 8px rgba(23,20,15,0.05), 0 24px 60px -20px rgba(23,20,15,0.22); }
 
-  .grain { position: absolute; inset: 0; pointer-events: none; opacity: .05; mix-blend-mode: overlay; }
-
-  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+  /* Fade-up scroll reveal */
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.22,.61,.36,1), transform 0.8s cubic-bezier(.22,.61,.36,1); }
   .fade-up.in-view { opacity: 1; transform: translateY(0); }
+  .fade-up.delay-1 { transition-delay: 0.08s; }
+  .fade-up.delay-2 { transition-delay: 0.16s; }
+  .fade-up.delay-3 { transition-delay: 0.24s; }
+  .fade-up.delay-4 { transition-delay: 0.32s; }
+  .fade-up.delay-5 { transition-delay: 0.4s; }
 
-  .img-cover { object-fit: cover; }
+  /* Testimonial slider */
+  .slider-track { display: flex; transition: transform 0.6s cubic-bezier(.65,0,.35,1); }
+  .slider-track[data-index="0"] { transform: translateX(0%); }
+  .slider-track[data-index="1"] { transform: translateX(-100%); }
+  .slide { flex: 0 0 100%; }
 
-  ::selection { background: #A9793E; color: #fff; }
+  .dot { width: 8px; height: 8px; border-radius: 9999px; background-color: rgba(255,255,255,0.28); transition: background-color 0.3s ease, width 0.3s ease; }
+  .dot.active { background-color: #FFFFFF; width: 22px; }
 
-  .noise-bg {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  /* Mobile nav */
+  #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  #mobile-menu.open { max-height: 480px; }
 
-  .link-underline { position: relative; }
-  .link-underline::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:currentColor; transition: width .35s cubic-bezier(.16,1,.3,1); }
-  .link-underline:hover::after { width:100%; }
-
-  .marker-dot { width:6px; height:6px; border-radius:9999px; background:#A9793E; }
-
-  .card-hover { transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s cubic-bezier(.16,1,.3,1); }
-  .card-hover:hover { transform: translateY(-6px); }
-
-  .btn-primary { transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1), background-color .35s ease; }
-  .btn-primary:hover { transform: translateY(-2px); }
-  .btn-primary:active { transform: translateY(0); }
-
-  .step-line { background: repeating-linear-gradient(90deg, #D8CDB4 0, #D8CDB4 6px, transparent 6px, transparent 14px); }
-
-  .mobile-nav { transition: max-height .5s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
-
-  input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
-    outline: 2px solid #A9793E; outline-offset: 3px;
-  }
-
-  .slide { transition: transform .6s cubic-bezier(.16,1,.3,1); }
+  /* Accordion */
+  .accordion-icon { transition: transform 0.3s ease; }
+  .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+  .accordion-panel { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .accordion-item.open .accordion-panel { max-height: 200px; }
 </style>
 </head>
-
 <body class="bg-bg text-ink font-sans antialiased">
 
-<!-- ============ HEADER ============ -->
-<header id="top" class="fixed top-0 inset-x-0 z-50 bg-bg/85 backdrop-blur-md border-b border-line/70">
-  <div class="max-w-8xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-    <a href="#top" class="font-display text-xl tracking-[0.18em] uppercase text-ink">G <span class="text-accent">Vision</span></a>
+<!-- ===================== HEADER ===================== -->
+<header class="fixed top-0 inset-x-0 z-50 bg-bg/90 backdrop-blur border-b border-line">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+    <a href="#top" class="font-display text-2xl tracking-[0.12em] text-ink">G VISION</a>
 
-    <nav class="hidden lg:flex items-center gap-10 text-[13px] tracking-wide uppercase text-inksoft">
-      <a href="#services" class="link-underline hover:text-ink transition-colors">Services</a>
-      <a href="#about" class="link-underline hover:text-ink transition-colors">About</a>
-      <a href="#markets" class="link-underline hover:text-ink transition-colors">Markets</a>
-      <a href="#process" class="link-underline hover:text-ink transition-colors">Process</a>
-      <a href="#testimonials" class="link-underline hover:text-ink transition-colors">Testimonials</a>
-      <a href="#contact" class="link-underline hover:text-ink transition-colors">Contact</a>
+    <nav class="hidden md:flex items-center gap-9 text-sm font-medium text-inksoft">
+      <a href="#services" class="hover:text-accent transition-colors">Services</a>
+      <a href="#about" class="hover:text-accent transition-colors">About</a>
+      <a href="#partners" class="hover:text-accent transition-colors">Countries</a>
+      <a href="#process" class="hover:text-accent transition-colors">Process</a>
+      <a href="#testimonials" class="hover:text-accent transition-colors">Testimonials</a>
+      <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
     </nav>
 
-    <div class="hidden lg:flex items-center gap-6">
-      <a href="tel:+10000000000" class="text-sm text-inksoft hover:text-ink transition-colors">+1 (000) 000&#8209;0000</a>
-      <a href="#feedback" class="btn-primary inline-flex items-center gap-2 bg-ink text-bg text-[13px] tracking-wide uppercase px-6 py-3 rounded-full hover:bg-accentdark">
-        Get in Touch
-      </a>
-    </div>
+    <a href="#feedback" class="hidden md:inline-flex items-center rounded-full bg-ink text-bg text-sm font-medium px-6 py-3 hover:bg-accent transition-colors">
+      Get in Touch
+    </a>
 
-    <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="lg:hidden relative w-9 h-9 flex flex-col items-center justify-center gap-[5px]">
-      <span class="menu-bar block w-6 h-px bg-ink transition-transform duration-300"></span>
-      <span class="menu-bar block w-6 h-px bg-ink transition-opacity duration-300"></span>
-      <span class="menu-bar block w-6 h-px bg-ink transition-transform duration-300"></span>
+    <button id="menu-btn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden text-ink">
+      <svg id="icon-open" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg id="icon-close" class="w-7 h-7 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
 
-  <div id="mobileNav" class="mobile-nav lg:hidden overflow-hidden max-h-0 opacity-0 bg-bg border-t border-line/70">
-    <div class="px-6 py-6 flex flex-col gap-5 text-sm uppercase tracking-wide text-inksoft">
+  <div id="mobile-menu" class="md:hidden border-t border-line bg-bg">
+    <div class="px-6 py-6 flex flex-col gap-5 text-inksoft font-medium">
       <a href="#services" class="mobile-link">Services</a>
       <a href="#about" class="mobile-link">About</a>
-      <a href="#markets" class="mobile-link">Markets</a>
+      <a href="#partners" class="mobile-link">Countries</a>
       <a href="#process" class="mobile-link">Process</a>
       <a href="#testimonials" class="mobile-link">Testimonials</a>
       <a href="#contact" class="mobile-link">Contact</a>
-      <a href="#feedback" class="mt-2 text-center bg-ink text-bg py-3 rounded-full">Get in Touch</a>
+      <a href="#feedback" class="mobile-link inline-flex items-center rounded-full bg-ink text-bg px-6 py-3 w-max">Get in Touch</a>
     </div>
   </div>
 </header>
 
-<!-- ============ HERO ============ -->
-<section id="home" class="relative pt-40 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
-  <div class="absolute -top-24 -right-40 w-[36rem] h-[36rem] rounded-full bg-accentlight/60 blur-3xl"></div>
+<main id="top">
 
-  <div class="max-w-8xl mx-auto px-6 lg:px-10 relative grid lg:grid-cols-2 gap-16 items-center">
+<!-- ===================== HERO ===================== -->
+<section class="grain bg-ink text-bg pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-14 items-center relative z-10">
     <div class="fade-up">
-      <p class="flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accentdark mb-6">
-        <span class="marker-dot"></span> International Real Estate Advisory
-      </p>
-      <h1 class="font-display text-balance text-[2.6rem] leading-[1.08] sm:text-6xl lg:text-[4rem] lg:leading-[1.05] tracking-[-0.02em] text-ink">
-        Elevate your real estate journey to the next level.
+      <p class="text-xs tracking-[0.25em] text-accentlight/80 font-medium mb-5">REAL ESTATE ADVISORY</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] tracking-tight mb-6">
+        Raise Your Standard of Living to a New Level.
       </h1>
-      <p class="mt-7 text-lg text-inksoft leading-[1.7] max-w-lg">
-        A personalized, full-service partner for buying, selling and investing in property across borders — guided by expertise, discretion, and a network built over two decades.
+      <p class="text-bg/70 text-base sm:text-lg leading-relaxed max-w-lg mb-9">
+        Personalized, end-to-end real estate advisory — from first search to final signature — built on two decades of market expertise and an international partner network.
       </p>
-
-      <div class="mt-9 flex flex-wrap gap-4">
-        <a href="#feedback" class="btn-primary bg-ink text-bg text-[13px] tracking-wide uppercase px-8 py-4 rounded-full hover:bg-accentdark shadow-soft">
-          Book a Consultation
-        </a>
-        <a href="#services" class="btn-primary inline-flex items-center gap-2 border border-ink/20 text-ink text-[13px] tracking-wide uppercase px-8 py-4 rounded-full hover:border-ink">
-          Explore Services
-        </a>
+      <div class="flex flex-wrap items-center gap-4 mb-14">
+        <a href="#feedback" class="inline-flex items-center rounded-full bg-accent text-ink font-medium px-7 py-4 hover:bg-accentlight transition-colors">Book a Consultation</a>
+        <a href="#services" class="inline-flex items-center rounded-full border border-bg/25 text-bg font-medium px-7 py-4 hover:border-bg/60 transition-colors">View Services</a>
       </div>
-
-      <div class="mt-14 grid grid-cols-3 gap-8 max-w-md">
+      <div class="grid grid-cols-2 gap-8 max-w-md border-t border-bg/15 pt-8">
         <div>
-          <p class="font-display text-3xl text-ink">20+</p>
-          <p class="text-xs uppercase tracking-wide text-muted mt-1">Years Experience</p>
+          <p class="font-display text-3xl">$100M+</p>
+          <p class="text-xs tracking-wide text-bg/55 mt-2 uppercase">In closed transactions guided</p>
         </div>
         <div>
-          <p class="font-display text-3xl text-ink">15+</p>
-          <p class="text-xs uppercase tracking-wide text-muted mt-1">Countries Served</p>
-        </div>
-        <div>
-          <p class="font-display text-3xl text-ink">500+</p>
-          <p class="text-xs uppercase tracking-wide text-muted mt-1">Clients Guided</p>
+          <p class="font-display text-3xl">20+</p>
+          <p class="text-xs tracking-wide text-bg/55 mt-2 uppercase">Years of combined market experience</p>
         </div>
       </div>
     </div>
 
-    <div class="fade-up relative">
-      <div class="relative rounded-[2rem] overflow-hidden shadow-elevated aspect-[4/5]">
-        <img src="IMG_7992.JPG" alt="Portrait of the G Vision founder and principal real estate advisor" class="w-full h-full img-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent"></div>
-      </div>
-
-      <div class="absolute -bottom-8 -left-8 bg-surface rounded-2xl shadow-elevated px-6 py-5 hidden sm:flex items-center gap-4 max-w-[15rem]">
-        <div class="w-11 h-11 rounded-full bg-accentlight flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>
-        </div>
-        <div>
-          <p class="font-display text-xl text-ink leading-none">98%</p>
-          <p class="text-xs text-muted mt-1">Client satisfaction across every market served</p>
-        </div>
-      </div>
-
-      <div class="absolute -top-6 -right-6 bg-ink text-bg rounded-2xl shadow-dark px-5 py-4 hidden sm:block">
-        <p class="text-[11px] uppercase tracking-wide text-bg/60">Available for</p>
-        <p class="font-display text-lg">New Consultations</p>
+    <div class="fade-up delay-2 relative">
+      <div class="rounded-[2rem] overflow-hidden shadow-soft-lg bg-bgalt max-w-md mx-auto">
+        <img src="IMG_7992.JPG" alt="Portrait of the G Vision founder and principal advisor" class="w-full h-auto object-cover" />
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SERVICES ============ -->
-<section id="services" class="py-24 lg:py-32 border-t border-line/70">
-  <div class="max-w-8xl mx-auto px-6 lg:px-10">
-    <div class="max-w-2xl mx-auto text-center fade-up">
-      <p class="flex items-center justify-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accentdark mb-5">
-        <span class="marker-dot"></span> What I Offer
-      </p>
-      <h2 class="font-display text-balance text-4xl lg:text-5xl tracking-[-0.02em] text-ink">Services built around your goals</h2>
-      <p class="mt-5 text-inksoft leading-[1.7]">From first search to final signature, every service is tailored to how and where you want to invest.</p>
-    </div>
-
-    <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Service card template -->
-      <div class="fade-up card-hover bg-surface border border-line/80 rounded-2xl p-8 shadow-soft">
-        <div class="w-12 h-12 rounded-xl bg-accentlight flex items-center justify-center mb-6">
-          <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-ink">Residential Sales &amp; Acquisitions</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">Sourcing, evaluating and negotiating residential property that matches your lifestyle and long-term goals.</p>
-      </div>
-
-      <div class="fade-up card-hover bg-surface border border-line/80 rounded-2xl p-8 shadow-soft">
-        <div class="w-12 h-12 rounded-xl bg-accentlight flex items-center justify-center mb-6">
-          <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-ink">International Investment Advisory</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">Cross-border strategy and due diligence to help you invest confidently in markets outside your own.</p>
-      </div>
-
-      <div class="fade-up card-hover bg-surface border border-line/80 rounded-2xl p-8 shadow-soft">
-        <div class="w-12 h-12 rounded-xl bg-accentlight flex items-center justify-center mb-6">
-          <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/><path d="M9 12h.01M15 12h.01"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-ink">Property Management</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">Hands-on oversight of your property once the deal is closed — tenants, maintenance, and reporting handled.</p>
-      </div>
-
-      <div class="fade-up card-hover bg-surface border border-line/80 rounded-2xl p-8 shadow-soft">
-        <div class="w-12 h-12 rounded-xl bg-accentlight flex items-center justify-center mb-6">
-          <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3-5.5-3-5.5 3 1-6.3L3 8.9 9 8z"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-ink">Relocation &amp; Concierge</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">A single point of contact for every detail of your move — from paperwork to settling into a new city.</p>
-      </div>
-
-      <div class="fade-up card-hover bg-surface border border-line/80 rounded-2xl p-8 shadow-soft">
-        <div class="w-12 h-12 rounded-xl bg-accentlight flex items-center justify-center mb-6">
-          <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19h16"/><path d="M6 19V9M12 19V5M18 19v-7"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-ink">Market Analysis &amp; Valuation</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">Clear, data-backed reads on pricing and timing, so every decision is made with full visibility.</p>
-      </div>
-
-      <div class="fade-up card-hover bg-surface border border-line/80 rounded-2xl p-8 shadow-soft">
-        <div class="w-12 h-12 rounded-xl bg-accentlight flex items-center justify-center mb-6">
-          <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-        </div>
-        <h3 class="font-display text-xl text-ink">Legal &amp; Transaction Support</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">Coordination with trusted legal and financial partners to keep every transaction sound and secure.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CALL TO ACTION ============ -->
-<section class="relative py-24 lg:py-0 bg-ink text-bg overflow-hidden">
-  <div class="grain noise-bg"></div>
-  <div class="max-w-8xl mx-auto lg:px-10 relative grid lg:grid-cols-2 items-stretch">
-    <div class="fade-up relative min-h-[22rem] lg:min-h-[32rem] px-6 lg:px-0">
-      <div class="lg:absolute lg:inset-y-0 lg:-left-10 lg:right-10 rounded-2xl lg:rounded-none overflow-hidden h-full">
-        <img src="photos/IMG_8001.JPG" alt="Reviewing property documents and investment figures" class="w-full h-full img-cover">
-      </div>
-    </div>
-
-    <div class="fade-up px-6 lg:px-16 py-16 lg:py-28 flex flex-col justify-center">
-      <p class="flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accent mb-6">
-        <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> Call to Action
-      </p>
-      <h2 class="font-display text-balance text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.15] tracking-[-0.02em]">
-        Earning your trust through professionalism, every step of the way.
-      </h2>
-      <p class="mt-6 text-bg/70 leading-[1.7] max-w-md">
-        Real estate decisions carry weight — financial, emotional, and long-term. My role is to be the steady, reliable partner who guides you through each stage with clarity and care.
-      </p>
-      <div class="mt-9">
-        <a href="#about" class="btn-primary inline-flex items-center gap-3 bg-bg text-ink text-[13px] tracking-wide uppercase px-8 py-4 rounded-full hover:bg-accent hover:text-bg">
-          Learn More About Me
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ABOUT YOU ============ -->
-<section id="about" class="py-24 lg:py-32">
-  <div class="max-w-8xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
-    <div class="fade-up relative order-2 lg:order-1">
-      <div class="rounded-[2rem] overflow-hidden shadow-elevated aspect-[4/5] max-w-md mx-auto lg:mx-0">
-        <img src="IMG_7993.PNG" alt="The G Vision founder in various client-facing moments" class="w-full h-full img-cover">
-      </div>
-      <div class="absolute bottom-6 -right-4 sm:-right-8 bg-surface rounded-2xl shadow-elevated px-6 py-5 max-w-[13rem]">
-        <p class="font-display text-2xl text-ink leading-none">20+</p>
-        <p class="text-xs text-muted mt-2 leading-relaxed">Years building trusted relationships across global real estate markets</p>
-      </div>
-    </div>
-
-    <div class="fade-up order-1 lg:order-2">
-      <p class="flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accentdark mb-6">
-        <span class="marker-dot"></span> About Me
-      </p>
-      <h2 class="font-display text-balance text-4xl lg:text-5xl tracking-[-0.02em] text-ink leading-[1.1]">
-        Dedicated to your success, wherever you're investing.
-      </h2>
-      <p class="mt-6 text-inksoft leading-[1.7]">
-        I built G Vision on a simple idea: real estate should feel personal, even when it crosses borders. Over two decades, I've helped individuals and families buy, sell, and invest in property across a growing list of international markets — combining local market knowledge with a genuinely hands-on approach.
-      </p>
-      <p class="mt-4 text-inksoft leading-[1.7]">
-        Every client relationship starts with listening. From there, I bring in the right network, the right data, and the right amount of patience to get the outcome you're after.
-      </p>
-
-      <ul class="mt-9 grid sm:grid-cols-2 gap-5">
-        <li class="flex items-start gap-3">
-          <span class="mt-1 w-5 h-5 rounded-full bg-accentlight flex items-center justify-center shrink-0">
-            <svg class="w-3 h-3 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-          </span>
-          <span class="text-sm text-inksoft leading-[1.6]">Licensed across multiple jurisdictions</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1 w-5 h-5 rounded-full bg-accentlight flex items-center justify-center shrink-0">
-            <svg class="w-3 h-3 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-          </span>
-          <span class="text-sm text-inksoft leading-[1.6]">Personal, hands-on approach to every deal</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1 w-5 h-5 rounded-full bg-accentlight flex items-center justify-center shrink-0">
-            <svg class="w-3 h-3 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-          </span>
-          <span class="text-sm text-inksoft leading-[1.6]">Established international partner network</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <span class="mt-1 w-5 h-5 rounded-full bg-accentlight flex items-center justify-center shrink-0">
-            <svg class="w-3 h-3 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-          </span>
-          <span class="text-sm text-inksoft leading-[1.6]">Transparent guidance from search to closing</span>
-        </li>
-      </ul>
-
-      <a href="#feedback" class="btn-primary mt-10 inline-flex items-center gap-2 bg-ink text-bg text-[13px] tracking-wide uppercase px-8 py-4 rounded-full hover:bg-accentdark shadow-soft">
-        Schedule a Consultation
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PARTNERS & COUNTRIES OF OPERATION ============ -->
-<section id="markets" class="py-24 lg:py-32 bg-bgalt/60 border-y border-line/70">
-  <div class="max-w-8xl mx-auto px-6 lg:px-10">
-    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 fade-up">
-      <div class="max-w-xl">
-        <p class="flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accentdark mb-5">
-          <span class="marker-dot"></span> Global Reach
-        </p>
-        <h2 class="font-display text-balance text-4xl lg:text-5xl tracking-[-0.02em] text-ink">Partners &amp; countries of operation</h2>
-      </div>
-      <p class="text-inksoft leading-[1.7] max-w-sm">A vetted network of legal, financial and on-the-ground partners across every market I operate in.</p>
-    </div>
-
-    <!-- Featured market -->
-    <div class="fade-up mt-14 relative rounded-[2rem] overflow-hidden shadow-elevated aspect-[16/9] lg:aspect-[21/9]">
-      <img src="photos/IMG_8003.JPG" alt="Residential towers in one of the markets served" class="w-full h-full img-cover">
-      <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent"></div>
-      <div class="absolute inset-x-0 bottom-0 p-8 lg:p-12">
-        <p class="text-[13px] uppercase tracking-wide text-bg/70">Featured Market</p>
-        <h3 class="font-display text-2xl lg:text-3xl text-bg mt-2">[ Country / Region Name ]</h3>
-        <p class="text-bg/70 text-sm mt-2 max-w-md">Add a short line on why this market matters — pricing trends, growth, or a signature project.</p>
-      </div>
-    </div>
-
-    <!-- Country grid -->
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="fade-up card-hover group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-soft">
-        <img src="photos/IMG_8002.JPG" alt="Property market represented by sunset skyline" class="w-full h-full img-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"></div>
-        <p class="absolute bottom-5 left-5 text-bg font-display text-lg">[ Country Name ]</p>
-      </div>
-      <div class="fade-up card-hover group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-soft">
-        <img src="photos/IMG_8005.JPG" alt="Property market represented by a luxury interior" class="w-full h-full img-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"></div>
-        <p class="absolute bottom-5 left-5 text-bg font-display text-lg">[ Country Name ]</p>
-      </div>
-      <div class="fade-up card-hover group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-soft">
-        <img src="photos/IMG_8006.JPG" alt="Property market represented by an urban scene" class="w-full h-full img-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"></div>
-        <p class="absolute bottom-5 left-5 text-bg font-display text-lg">[ Country Name ]</p>
-      </div>
-      <div class="fade-up card-hover group relative rounded-2xl overflow-hidden aspect-[4/5] shadow-soft">
-        <img src="photos/IMG_8004.JPG" alt="Property market represented by a data-driven overview" class="w-full h-full img-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent"></div>
-        <p class="absolute bottom-5 left-5 text-bg font-display text-lg">[ Country Name ]</p>
-      </div>
-    </div>
-
-    <!-- Partner logos -->
-    <div class="fade-up mt-16">
-      <p class="text-center text-[13px] uppercase tracking-wide text-muted mb-8">Trusted by leading partners</p>
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-6">
-        <img src="https://placehold.co/160x60/F1ECE0/928C7E?text=Partner+Logo&font=raleway" alt="Partner logo placeholder" class="mx-auto opacity-70 hover:opacity-100 transition-opacity">
-        <img src="https://placehold.co/160x60/F1ECE0/928C7E?text=Partner+Logo&font=raleway" alt="Partner logo placeholder" class="mx-auto opacity-70 hover:opacity-100 transition-opacity">
-        <img src="https://placehold.co/160x60/F1ECE0/928C7E?text=Partner+Logo&font=raleway" alt="Partner logo placeholder" class="mx-auto opacity-70 hover:opacity-100 transition-opacity">
-        <img src="https://placehold.co/160x60/F1ECE0/928C7E?text=Partner+Logo&font=raleway" alt="Partner logo placeholder" class="mx-auto opacity-70 hover:opacity-100 transition-opacity">
-        <img src="https://placehold.co/160x60/F1ECE0/928C7E?text=Partner+Logo&font=raleway" alt="Partner logo placeholder" class="mx-auto opacity-70 hover:opacity-100 transition-opacity col-span-2 sm:col-span-1">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WORK PROCESS ============ -->
-<section id="process" class="py-24 lg:py-32">
-  <div class="max-w-8xl mx-auto px-6 lg:px-10">
-    <div class="max-w-2xl mx-auto text-center fade-up">
-      <p class="flex items-center justify-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accentdark mb-5">
-        <span class="marker-dot"></span> How We Work Together
-      </p>
-      <h2 class="font-display text-balance text-4xl lg:text-5xl tracking-[-0.02em] text-ink">A clear process, from first call to closing</h2>
-    </div>
-
-    <div class="mt-20 grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-14 relative">
-      <div class="hidden lg:block absolute top-6 left-[12.5%] right-[12.5%] h-px step-line"></div>
-
-      <div class="fade-up relative text-center lg:text-left">
-        <span class="font-display text-5xl text-accentlight block lg:inline-block relative z-10">01</span>
-        <h3 class="font-display text-xl text-ink mt-4">Discovery Call</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">We start with a conversation about your goals, budget and preferred markets.</p>
-      </div>
-      <div class="fade-up relative text-center lg:text-left">
-        <span class="font-display text-5xl text-accentlight block lg:inline-block relative z-10">02</span>
-        <h3 class="font-display text-xl text-ink mt-4">Strategy &amp; Search</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">I build a shortlist backed by market data and my on-the-ground network.</p>
-      </div>
-      <div class="fade-up relative text-center lg:text-left">
-        <span class="font-display text-5xl text-accentlight block lg:inline-block relative z-10">03</span>
-        <h3 class="font-display text-xl text-ink mt-4">Negotiation &amp; Due Diligence</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">I handle offers, paperwork and legal coordination so nothing gets missed.</p>
-      </div>
-      <div class="fade-up relative text-center lg:text-left">
-        <span class="font-display text-5xl text-accentlight block lg:inline-block relative z-10">04</span>
-        <h3 class="font-display text-xl text-ink mt-4">Closing &amp; Beyond</h3>
-        <p class="mt-3 text-sm text-inksoft leading-[1.7]">From final signature to ongoing management, I stay involved after the deal closes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section id="testimonials" class="py-24 lg:py-32 bg-ink text-bg relative overflow-hidden">
-  <div class="grain noise-bg"></div>
-  <div class="max-w-8xl mx-auto px-6 lg:px-10 relative">
-    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 fade-up">
-      <div>
-        <p class="flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accent mb-5">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span> Testimonials
-        </p>
-        <h2 class="font-display text-balance text-4xl lg:text-5xl tracking-[-0.02em]">What clients say</h2>
-      </div>
-      <div class="flex gap-3">
-        <button id="prevSlide" aria-label="Previous testimonial" class="btn-primary w-11 h-11 rounded-full border border-bg/25 flex items-center justify-center hover:bg-bg hover:text-ink">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button id="nextSlide" aria-label="Next testimonial" class="btn-primary w-11 h-11 rounded-full border border-bg/25 flex items-center justify-center hover:bg-bg hover:text-ink">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="mt-14 overflow-hidden">
-      <div id="track" class="flex slide">
-        <div class="w-full shrink-0 grid sm:grid-cols-3 gap-6 pr-0 sm:pr-6">
-          <div class="fade-up bg-bg/[0.06] border border-bg/10 rounded-2xl p-8">
-            <div class="flex gap-1 text-accent mb-5">
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-            </div>
-            <p class="text-bg/80 leading-[1.7] text-[15px]">"Every step of buying abroad felt overwhelming until we started working together. Clear communication and zero surprises at closing."</p>
-            <p class="mt-6 font-display text-lg">Client Name</p>
-            <p class="text-xs text-bg/50 uppercase tracking-wide mt-1">Property Buyer</p>
-          </div>
-          <div class="fade-up bg-bg/[0.06] border border-bg/10 rounded-2xl p-8">
-            <div class="flex gap-1 text-accent mb-5">
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-            </div>
-            <p class="text-bg/80 leading-[1.7] text-[15px]">"As a first-time international investor, having someone coordinate legal, financial and local logistics made all the difference."</p>
-            <p class="mt-6 font-display text-lg">Client Name</p>
-            <p class="text-xs text-bg/50 uppercase tracking-wide mt-1">Investor</p>
-          </div>
-          <div class="fade-up bg-bg/[0.06] border border-bg/10 rounded-2xl p-8">
-            <div class="flex gap-1 text-accent mb-5">
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-            </div>
-            <p class="text-bg/80 leading-[1.7] text-[15px]">"Sold our property faster and for more than we expected. The process felt calm and well managed from day one."</p>
-            <p class="mt-6 font-display text-lg">Client Name</p>
-            <p class="text-xs text-bg/50 uppercase tracking-wide mt-1">Property Seller</p>
-          </div>
-        </div>
-
-        <div class="w-full shrink-0 grid sm:grid-cols-3 gap-6 pl-0 sm:pl-6">
-          <div class="fade-up bg-bg/[0.06] border border-bg/10 rounded-2xl p-8">
-            <div class="flex gap-1 text-accent mb-5">
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-            </div>
-            <p class="text-bg/80 leading-[1.7] text-[15px]">"Relocating our family across the world was daunting. Every detail, from schools to paperwork, was handled with real care."</p>
-            <p class="mt-6 font-display text-lg">Client Name</p>
-            <p class="text-xs text-bg/50 uppercase tracking-wide mt-1">Relocation Client</p>
-          </div>
-          <div class="fade-up bg-bg/[0.06] border border-bg/10 rounded-2xl p-8">
-            <div class="flex gap-1 text-accent mb-5">
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-            </div>
-            <p class="text-bg/80 leading-[1.7] text-[15px]">"Sharp market insight paired with genuine patience. Never felt rushed into a decision that wasn't right for us."</p>
-            <p class="mt-6 font-display text-lg">Client Name</p>
-            <p class="text-xs text-bg/50 uppercase tracking-wide mt-1">Investor</p>
-          </div>
-          <div class="fade-up bg-bg/[0.06] border border-bg/10 rounded-2xl p-8">
-            <div class="flex gap-1 text-accent mb-5">
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L1.3 7.4l6.1-.8z"/></svg>
-            </div>
-            <p class="text-bg/80 leading-[1.7] text-[15px]">"What stood out was the follow-through after closing. Questions still get answered months later, no hesitation."</p>
-            <p class="mt-6 font-display text-lg">Client Name</p>
-            <p class="text-xs text-bg/50 uppercase tracking-wide mt-1">Property Buyer</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex justify-center gap-2 mt-10">
-      <button class="dot w-2 h-2 rounded-full bg-bg" data-index="0" aria-label="Show testimonial group 1"></button>
-      <button class="dot w-2 h-2 rounded-full bg-bg/30" data-index="1" aria-label="Show testimonial group 2"></button>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FEEDBACK FORM ============ -->
-<section id="feedback" class="py-24 lg:py-32 bg-bgalt/60">
-  <div class="max-w-8xl mx-auto px-6 lg:px-10">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 fade-up">
-      <div class="text-center">
-        <p class="font-display text-4xl text-ink">20+</p>
-        <p class="text-xs uppercase tracking-wide text-muted mt-2">Years Experience</p>
-      </div>
-      <div class="text-center">
-        <p class="font-display text-4xl text-ink">15+</p>
-        <p class="text-xs uppercase tracking-wide text-muted mt-2">Countries Served</p>
-      </div>
-      <div class="text-center">
-        <p class="font-display text-4xl text-ink">500+</p>
-        <p class="text-xs uppercase tracking-wide text-muted mt-2">Clients Guided</p>
-      </div>
-      <div class="text-center">
-        <p class="font-display text-4xl text-ink">98%</p>
-        <p class="text-xs uppercase tracking-wide text-muted mt-2">Client Satisfaction</p>
-      </div>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
+<!-- ===================== SERVICES ===================== -->
+<section id="services" class="bg-bgalt py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
       <div class="fade-up">
-        <p class="flex items-center gap-3 text-[13px] tracking-[0.2em] uppercase text-accentdark mb-5">
-          <span class="marker-dot"></span> Get In Touch
+        <p class="text-xs tracking-[0.25em] text-accentdark font-medium mb-4">SERVICES</p>
+        <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-6 max-w-md">
+          Comprehensive Real Estate Expertise, Tailored to You
+        </h2>
+        <p class="text-inksoft leading-relaxed max-w-md">
+          Whether you're buying your first home, expanding an investment portfolio, or relocating across borders, every engagement is built around your specific goals — with clear guidance at each step.
         </p>
-        <h2 class="font-display text-balance text-4xl lg:text-5xl tracking-[-0.02em] text-ink leading-[1.1]">Ready to start your real estate journey?</h2>
-        <p class="mt-6 text-inksoft leading-[1.7] max-w-md">Share a few details below and I'll be in touch within one business day to schedule a call.</p>
+      </div>
+      <div class="fade-up delay-2 rounded-2xl overflow-hidden shadow-soft">
+        <img src="photos/IMG_8001.JPG" alt="Reviewing property investment documents and a house model" class="w-full h-72 sm:h-96 object-cover" />
+      </div>
+    </div>
 
-        <div class="mt-10 rounded-2xl overflow-hidden shadow-elevated aspect-[4/3]">
-          <img src="photos/IMG_8005.JPG" alt="Welcome to your new home" class="w-full h-full img-cover">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="fade-up bg-surface rounded-2xl p-8 border border-line hover:border-accent/40 transition-colors">
+        <svg class="w-9 h-9 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5M5 9.5V21h5v-6h4v6h5V9.5"/></svg>
+        <h3 class="font-display text-xl mb-2">Property Search &amp; Acquisition</h3>
+        <p class="text-sm text-muted leading-relaxed">Curated shortlists and private access to listings that match your brief, budget, and lifestyle.</p>
+      </div>
+
+      <div class="fade-up delay-1 bg-surface rounded-2xl p-8 border border-line hover:border-accent/40 transition-colors">
+        <svg class="w-9 h-9 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V9m6 10V5m6 14v-7m6 7V11"/></svg>
+        <h3 class="font-display text-xl mb-2">Investment Advisory</h3>
+        <p class="text-sm text-muted leading-relaxed">Data-informed guidance on yield, growth markets, and portfolio diversification.</p>
+      </div>
+
+      <div class="fade-up delay-2 bg-surface rounded-2xl p-8 border border-line hover:border-accent/40 transition-colors">
+        <svg class="w-9 h-9 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7" stroke-linecap="round"/><path stroke-linecap="round" d="m20 20-3.5-3.5"/></svg>
+        <h3 class="font-display text-xl mb-2">Market Analysis &amp; Valuation</h3>
+        <p class="text-sm text-muted leading-relaxed">Accurate, up-to-date valuations grounded in local market intelligence.</p>
+      </div>
+
+      <div class="fade-up bg-surface rounded-2xl p-8 border border-line hover:border-accent/40 transition-colors">
+        <svg class="w-9 h-9 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l5 5v13H7z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+        <h3 class="font-display text-xl mb-2">Legal &amp; Documentation Support</h3>
+        <p class="text-sm text-muted leading-relaxed">Coordinated support through contracts, due diligence, and closing paperwork.</p>
+      </div>
+
+      <div class="fade-up delay-1 bg-surface rounded-2xl p-8 border border-line hover:border-accent/40 transition-colors">
+        <svg class="w-9 h-9 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9" stroke-linecap="round"/><path stroke-linecap="round" d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+        <h3 class="font-display text-xl mb-2">Relocation &amp; Concierge</h3>
+        <p class="text-sm text-muted leading-relaxed">Practical, on-the-ground support for clients moving across cities or borders.</p>
+      </div>
+
+      <div class="fade-up delay-2 bg-surface rounded-2xl p-8 border border-line hover:border-accent/40 transition-colors">
+        <svg class="w-9 h-9 text-accent mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2" stroke-linecap="round"/><path stroke-linecap="round" d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg>
+        <h3 class="font-display text-xl mb-2">Portfolio Management</h3>
+        <p class="text-sm text-muted leading-relaxed">Ongoing oversight of multi-property portfolios, from performance to renewals.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CALL TO ACTION ===================== -->
+<section class="bg-bg py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
+    <div class="fade-up order-2 lg:order-1 rounded-[2rem] overflow-hidden shadow-soft-lg bg-bgalt">
+      <img src="IMG_4913.PNG" alt="Conceptual illustration of real estate vision and global reach" class="w-full h-auto object-cover" />
+    </div>
+    <div class="fade-up delay-2 order-1 lg:order-2">
+      <p class="text-xs tracking-[0.25em] text-accentdark font-medium mb-4">WHY CLIENTS TRUST US</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-6">
+        Earning Your Trust Through Proven Professionalism.
+      </h2>
+      <p class="text-inksoft leading-relaxed mb-9 max-w-lg">
+        Real estate decisions are rarely simple. G Vision exists to make them clearer — combining hands-on market knowledge with a calm, transparent process, so you always know what's happening and why.
+      </p>
+      <a href="#about" class="inline-flex items-center rounded-full border border-ink/20 text-ink font-medium px-7 py-4 hover:bg-ink hover:text-bg transition-colors">Learn More About Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT YOU ===================== -->
+<section id="about" class="bg-bgalt py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-start">
+    <div class="fade-up rounded-2xl overflow-hidden shadow-soft-lg">
+      <img src="IMG_7993.PNG" alt="Collage of the G Vision founder across client meetings and site visits" class="w-full h-auto object-cover" />
+    </div>
+
+    <div class="fade-up delay-2">
+      <p class="text-xs tracking-[0.25em] text-accentdark font-medium mb-4">WHO WE ARE</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-6">
+        A Dedicated Partner Committed to Your Success
+      </h2>
+      <p class="text-lg font-display mb-1">[ Your Name ]</p>
+      <p class="text-sm text-muted mb-6">Founder &amp; Principal Advisor, G Vision</p>
+      <p class="text-inksoft leading-relaxed mb-10 max-w-lg">
+        With over 20 years in real estate, I've built G Vision around a simple idea: clients deserve an advisor who treats their property decisions as carefully as their own. From first consultation to closing day, I'm personally involved at every stage — backed by a trusted network of partners across the markets where we operate.
+      </p>
+
+      <div class="divide-y divide-line border-t border-line">
+        <div class="accordion-item py-5">
+          <button class="accordion-toggle w-full flex items-center justify-between text-left">
+            <span class="font-display text-lg">Personalized Solutions</span>
+            <svg class="accordion-icon w-5 h-5 text-accent flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p class="text-sm text-muted leading-relaxed pt-3 pr-8">Every strategy starts with your goals, timeline, and risk appetite — not a generic template.</p>
+          </div>
+        </div>
+        <div class="accordion-item py-5">
+          <button class="accordion-toggle w-full flex items-center justify-between text-left">
+            <span class="font-display text-lg">End-to-End Service</span>
+            <svg class="accordion-icon w-5 h-5 text-accent flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p class="text-sm text-muted leading-relaxed pt-3 pr-8">One point of contact from search through signing — no handoffs, no repeating yourself.</p>
+          </div>
+        </div>
+        <div class="accordion-item py-5">
+          <button class="accordion-toggle w-full flex items-center justify-between text-left">
+            <span class="font-display text-lg">Exceptional Client Support</span>
+            <svg class="accordion-icon w-5 h-5 text-accent flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <div class="accordion-panel">
+            <p class="text-sm text-muted leading-relaxed pt-3 pr-8">Responsive, honest communication — including the answers you didn't want to hear.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PARTNERS & COUNTRIES OF OPERATION ===================== -->
+<section id="partners" class="bg-bg py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="fade-up rounded-[2rem] overflow-hidden shadow-soft-lg mb-16 relative">
+      <img src="photos/IMG_8003.JPG" alt="Residential towers in a market where G Vision operates" class="w-full h-72 sm:h-[26rem] object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 p-8 sm:p-12">
+        <p class="text-xs tracking-[0.25em] text-accentlight font-medium mb-3">PARTNERS &amp; COUNTRIES OF OPERATION</p>
+        <h2 class="font-display text-3xl sm:text-4xl text-bg leading-tight max-w-lg">Global Reach, Local Expertise</h2>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-14">
+      <div class="lg:col-span-2">
+        <h3 class="font-display text-xl mb-6">Countries of Operation</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div class="fade-up border border-line rounded-xl px-5 py-4 text-sm text-inksoft">[ Country Name ]</div>
+          <div class="fade-up delay-1 border border-line rounded-xl px-5 py-4 text-sm text-inksoft">[ Country Name ]</div>
+          <div class="fade-up delay-2 border border-line rounded-xl px-5 py-4 text-sm text-inksoft">[ Country Name ]</div>
+          <div class="fade-up delay-1 border border-line rounded-xl px-5 py-4 text-sm text-inksoft">[ Country Name ]</div>
+          <div class="fade-up delay-2 border border-line rounded-xl px-5 py-4 text-sm text-inksoft">[ Country Name ]</div>
+          <div class="fade-up delay-3 border border-line rounded-xl px-5 py-4 text-sm text-inksoft">[ Country Name ]</div>
+        </div>
+
+        <h3 class="font-display text-xl mt-14 mb-6">Trusted Partners</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <img class="fade-up border border-line rounded-xl w-full h-16 object-contain p-3 grayscale" src="https://placehold.co/160x56/F6F4EF/8A7F6F?text=Partner+01" alt="Partner logo placeholder 1" />
+          <img class="fade-up delay-1 border border-line rounded-xl w-full h-16 object-contain p-3 grayscale" src="https://placehold.co/160x56/F6F4EF/8A7F6F?text=Partner+02" alt="Partner logo placeholder 2" />
+          <img class="fade-up delay-2 border border-line rounded-xl w-full h-16 object-contain p-3 grayscale" src="https://placehold.co/160x56/F6F4EF/8A7F6F?text=Partner+03" alt="Partner logo placeholder 3" />
+          <img class="fade-up delay-1 border border-line rounded-xl w-full h-16 object-contain p-3 grayscale" src="https://placehold.co/160x56/F6F4EF/8A7F6F?text=Partner+04" alt="Partner logo placeholder 4" />
+          <img class="fade-up delay-2 border border-line rounded-xl w-full h-16 object-contain p-3 grayscale" src="https://placehold.co/160x56/F6F4EF/8A7F6F?text=Partner+05" alt="Partner logo placeholder 5" />
+          <img class="fade-up delay-3 border border-line rounded-xl w-full h-16 object-contain p-3 grayscale" src="https://placehold.co/160x56/F6F4EF/8A7F6F?text=Partner+06" alt="Partner logo placeholder 6" />
         </div>
       </div>
 
-      <form id="feedbackForm" class="fade-up bg-surface rounded-[2rem] shadow-elevated p-8 lg:p-10">
-        <div id="formSuccess" class="hidden text-center py-10">
-          <div class="w-14 h-14 rounded-full bg-accentlight flex items-center justify-center mx-auto mb-5">
-            <svg class="w-6 h-6 text-accentdark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-          </div>
-          <h3 class="font-display text-2xl text-ink">Thank you</h3>
-          <p class="text-inksoft mt-2 text-sm">Your message has been received. I'll reach out shortly.</p>
+      <div class="fade-up delay-2 bg-bgalt rounded-2xl overflow-hidden shadow-soft flex flex-col">
+        <img src="photos/IMG_8004.JPG" alt="Conceptual illustration of a connected global real estate network" class="w-full h-56 object-cover" />
+        <div class="p-7">
+          <h4 class="font-display text-lg mb-2">A Connected Global Network</h4>
+          <p class="text-sm text-muted leading-relaxed">Every market we operate in is backed by vetted local partners, so you get the same standard of service wherever you're buying.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div id="formFields" class="grid gap-5">
-          <div class="grid sm:grid-cols-2 gap-5">
-            <div>
-              <label for="fname" class="block text-xs uppercase tracking-wide text-muted mb-2">Full Name</label>
-              <input id="fname" name="name" type="text" required placeholder="Jane Doe" class="w-full bg-bg border border-line rounded-xl px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-accent transition-colors">
-            </div>
-            <div>
-              <label for="femail" class="block text-xs uppercase tracking-wide text-muted mb-2">Email</label>
-              <input id="femail" name="email" type="email" required placeholder="jane@email.com" class="w-full bg-bg border border-line rounded-xl px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-accent transition-colors">
-            </div>
+<!-- ===================== WORK PROCESS ===================== -->
+<section id="process" class="bg-bgalt py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="fade-up rounded-2xl overflow-hidden shadow-soft-lg order-2 lg:order-1">
+      <img src="photos/IMG_8006.JPG" alt="Conceptual illustration of a structured, technology-supported real estate process" class="w-full h-auto object-cover" />
+    </div>
+
+    <div class="order-1 lg:order-2">
+      <p class="text-xs tracking-[0.25em] text-accentdark font-medium mb-4 fade-up">HOW WE WORK</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-10 fade-up delay-1">
+        A Clear, Guided Process From Start to Close
+      </h2>
+
+      <ol class="space-y-8">
+        <li class="fade-up flex gap-5">
+          <span class="font-display text-accent text-xl flex-shrink-0 w-10">01</span>
+          <div class="border-l border-line pl-5">
+            <h3 class="font-display text-lg mb-1">Initial Consultation</h3>
+            <p class="text-sm text-muted leading-relaxed">We start with a conversation about your goals, budget, and timeline.</p>
           </div>
-          <div class="grid sm:grid-cols-2 gap-5">
-            <div>
-              <label for="fphone" class="block text-xs uppercase tracking-wide text-muted mb-2">Phone</label>
-              <input id="fphone" name="phone" type="tel" placeholder="+1 (000) 000-0000" class="w-full bg-bg border border-line rounded-xl px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-accent transition-colors">
-            </div>
-            <div>
-              <label for="fcountry" class="block text-xs uppercase tracking-wide text-muted mb-2">Market of Interest</label>
-              <input id="fcountry" name="country" type="text" placeholder="e.g. Portugal" class="w-full bg-bg border border-line rounded-xl px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-accent transition-colors">
-            </div>
+        </li>
+        <li class="fade-up delay-1 flex gap-5">
+          <span class="font-display text-accent text-xl flex-shrink-0 w-10">02</span>
+          <div class="border-l border-line pl-5">
+            <h3 class="font-display text-lg mb-1">Market Research &amp; Matching</h3>
+            <p class="text-sm text-muted leading-relaxed">A curated shortlist of properties matched against your brief.</p>
+          </div>
+        </li>
+        <li class="fade-up delay-2 flex gap-5">
+          <span class="font-display text-accent text-xl flex-shrink-0 w-10">03</span>
+          <div class="border-l border-line pl-5">
+            <h3 class="font-display text-lg mb-1">Viewings &amp; Due Diligence</h3>
+            <p class="text-sm text-muted leading-relaxed">Guided viewings alongside thorough legal and structural checks.</p>
+          </div>
+        </li>
+        <li class="fade-up delay-3 flex gap-5">
+          <span class="font-display text-accent text-xl flex-shrink-0 w-10">04</span>
+          <div class="border-l border-line pl-5">
+            <h3 class="font-display text-lg mb-1">Negotiation &amp; Offer</h3>
+            <p class="text-sm text-muted leading-relaxed">Skilled negotiation to secure the right terms and the right price.</p>
+          </div>
+        </li>
+        <li class="fade-up delay-4 flex gap-5">
+          <span class="font-display text-accent text-xl flex-shrink-0 w-10">05</span>
+          <div class="pl-5">
+            <h3 class="font-display text-lg mb-1">Closing &amp; Handover</h3>
+            <p class="text-sm text-muted leading-relaxed">Documentation, signing, and a smooth handover of your new property.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section id="testimonials" class="grain bg-ink text-bg py-24 lg:py-32 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+    <div class="grid lg:grid-cols-[1fr,1.3fr] gap-14 items-start">
+
+      <div class="fade-up">
+        <p class="text-xs tracking-[0.25em] text-accentlight/80 font-medium mb-4">TESTIMONIALS</p>
+        <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-6">What Our Clients Say</h2>
+        <p class="text-bg/65 leading-relaxed mb-10 max-w-sm">
+          Start your real estate journey with confidence. Reach out today for an expert consultation and a plan built around you.
+        </p>
+        <div class="grid grid-cols-2 gap-8 mb-10">
+          <div>
+            <p class="font-display text-2xl">300+</p>
+            <p class="text-xs text-bg/55 uppercase tracking-wide mt-1">Happy Clients</p>
           </div>
           <div>
-            <label for="fmessage" class="block text-xs uppercase tracking-wide text-muted mb-2">Message</label>
-            <textarea id="fmessage" name="message" rows="4" required placeholder="Tell me a bit about what you're looking for..." class="w-full bg-bg border border-line rounded-xl px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-accent transition-colors resize-none"></textarea>
+            <p class="font-display text-2xl">4.9</p>
+            <p class="text-xs text-bg/55 uppercase tracking-wide mt-1">Average Rating</p>
           </div>
-          <button type="submit" class="btn-primary bg-ink text-bg text-[13px] tracking-wide uppercase px-8 py-4 rounded-full hover:bg-accentdark shadow-soft">
-            Send Message
-          </button>
-          <p class="text-xs text-muted leading-relaxed">This form currently displays a confirmation only. Connect it to your email or CRM provider to receive submissions.</p>
         </div>
-      </form>
+        <div class="rounded-2xl overflow-hidden shadow-soft-lg max-w-xs hidden sm:block">
+          <img src="photos/IMG_8005.JPG" alt="Welcome keys left on a kitchen counter for a new homeowner" class="w-full h-40 object-cover" />
+        </div>
+      </div>
+
+      <div class="fade-up delay-2">
+        <div class="overflow-hidden">
+          <div class="slider-track" id="slider-track" data-index="0">
+
+            <div class="slide grid sm:grid-cols-2 gap-6">
+              <div class="bg-bg/5 border border-bg/10 rounded-2xl p-7">
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-11 h-11 rounded-full bg-accent/20 text-accentlight flex items-center justify-center font-display text-sm">CM</div>
+                  <div>
+                    <p class="font-medium text-sm">[ Client Name ]</p>
+                    <p class="text-xs text-bg/50">First-time buyer</p>
+                  </div>
+                </div>
+                <p class="text-sm text-bg/75 leading-relaxed">Every question I had — however small — was answered clearly and quickly. I never felt like just another transaction.</p>
+              </div>
+              <div class="bg-bg/5 border border-bg/10 rounded-2xl p-7">
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-11 h-11 rounded-full bg-accent/20 text-accentlight flex items-center justify-center font-display text-sm">RK</div>
+                  <div>
+                    <p class="font-medium text-sm">[ Client Name ]</p>
+                    <p class="text-xs text-bg/50">Property investor</p>
+                  </div>
+                </div>
+                <p class="text-sm text-bg/75 leading-relaxed">The market analysis alone paid for the engagement. Sharp, honest, and genuinely invested in the outcome.</p>
+              </div>
+            </div>
+
+            <div class="slide grid sm:grid-cols-2 gap-6">
+              <div class="bg-bg/5 border border-bg/10 rounded-2xl p-7">
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-11 h-11 rounded-full bg-accent/20 text-accentlight flex items-center justify-center font-display text-sm">AT</div>
+                  <div>
+                    <p class="font-medium text-sm">[ Client Name ]</p>
+                    <p class="text-xs text-bg/50">Relocating client</p>
+                  </div>
+                </div>
+                <p class="text-sm text-bg/75 leading-relaxed">Moving countries is stressful enough — having one person coordinate everything made all the difference.</p>
+              </div>
+              <div class="bg-bg/5 border border-bg/10 rounded-2xl p-7">
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-11 h-11 rounded-full bg-accent/20 text-accentlight flex items-center justify-center font-display text-sm">JL</div>
+                  <div>
+                    <p class="font-medium text-sm">[ Client Name ]</p>
+                    <p class="text-xs text-bg/50">Portfolio owner</p>
+                  </div>
+                </div>
+                <p class="text-sm text-bg/75 leading-relaxed">Reliable, proactive, and always a step ahead. Our portfolio has never been better managed.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-9">
+          <div class="flex items-center gap-2" id="slider-dots">
+            <button class="dot active" data-slide="0" aria-label="Show testimonials group 1"></button>
+            <button class="dot" data-slide="1" aria-label="Show testimonials group 2"></button>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="slider-prev" aria-label="Previous testimonials" class="w-11 h-11 rounded-full border border-bg/25 flex items-center justify-center hover:bg-bg hover:text-ink transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <button id="slider-next" aria-label="Next testimonials" class="w-11 h-11 rounded-full border border-bg/25 flex items-center justify-center hover:bg-bg hover:text-ink transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACTS / FOOTER ============ -->
-<footer id="contact" class="bg-ink text-bg pt-24 pb-10 relative overflow-hidden">
-  <div class="grain noise-bg"></div>
-  <div class="max-w-8xl mx-auto px-6 lg:px-10 relative">
-    <div class="grid lg:grid-cols-[1.3fr,1fr,1fr,1fr] gap-12 pb-16 border-b border-bg/10">
+<!-- ===================== FEEDBACK FORM ===================== -->
+<section id="feedback" class="bg-bgalt py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+
+    <div class="fade-up">
+      <p class="text-xs tracking-[0.25em] text-accentdark font-medium mb-4">GET IN TOUCH</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-6 max-w-md">
+        Tell Us About Your Real Estate Goals
+      </h2>
+      <p class="text-inksoft leading-relaxed mb-10 max-w-md">
+        Share a few details below and we'll get back to you within one business day to schedule your consultation.
+      </p>
+
+      <form id="feedback-form" class="space-y-5 max-w-md" novalidate>
+        <div>
+          <label for="name" class="block text-sm font-medium text-inksoft mb-2">Full Name</label>
+          <input id="name" name="name" type="text" required class="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Jane Doe" />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="email" class="block text-sm font-medium text-inksoft mb-2">Email</label>
+            <input id="email" name="email" type="email" required class="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="jane@email.com" />
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-inksoft mb-2">Phone</label>
+            <input id="phone" name="phone" type="tel" class="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="+1 (___) ___-____" />
+          </div>
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-inksoft mb-2">Message</label>
+          <textarea id="message" name="message" rows="4" required class="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent" placeholder="Tell us what you're looking for..."></textarea>
+        </div>
+        <button type="submit" class="inline-flex items-center rounded-full bg-ink text-bg font-medium px-7 py-4 hover:bg-accent transition-colors">Send Message</button>
+
+        <p id="feedback-success" class="hidden items-center gap-2 text-sm text-accentdark bg-accentlight/60 border border-accent/30 rounded-xl px-4 py-3 mt-4">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Thank you — your message has been received. We'll be in touch soon.
+        </p>
+      </form>
+    </div>
+
+    <div class="fade-up delay-2 rounded-[2rem] overflow-hidden shadow-soft-lg">
+      <img src="photos/IMG_8002.JPG" alt="House keys and investment documents at sunset, ready for handover" class="w-full h-auto object-cover" />
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACTS ===================== -->
+<section id="contact" class="grain bg-ink text-bg">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-28 grid lg:grid-cols-2 gap-14 items-center relative z-10">
+    <div class="fade-up">
+      <p class="text-xs tracking-[0.25em] text-accentlight/80 font-medium mb-4">CONTACT</p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight mb-6">Ready to Begin?</h2>
+      <p class="text-bg/65 leading-relaxed max-w-md mb-9">
+        Whether you're buying, selling, or investing, G Vision is ready to guide you through every step. Let's make your next move a confident one.
+      </p>
+      <a href="#feedback" class="inline-flex items-center rounded-full border border-bg/25 text-bg font-medium px-7 py-4 hover:bg-bg hover:text-ink transition-colors">Get in Touch</a>
+    </div>
+
+    <div class="fade-up delay-2 grid grid-cols-2 gap-x-8 gap-y-10">
       <div>
-        <p class="font-display text-2xl tracking-[0.18em] uppercase">G <span class="text-accent">Vision</span></p>
-        <p class="mt-5 text-sm text-bg/60 leading-[1.7] max-w-xs">Personalized international real estate advisory — expertise, trust, and full-service support wherever your next property takes you.</p>
-        <div class="flex gap-3 mt-7">
-          <a href="#" aria-label="LinkedIn" class="btn-primary w-10 h-10 rounded-full border border-bg/20 flex items-center justify-center hover:bg-accent hover:border-accent">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V23h-4V8zm7.5 0h3.83v2.05h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.86c0-1.64-.03-3.75-2.29-3.75-2.29 0-2.64 1.79-2.64 3.63V23h-4V8z"/></svg>
+        <p class="font-display text-3xl">20+</p>
+        <p class="text-xs tracking-wide text-bg/55 mt-2 uppercase">Years of Experience</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl">150+</p>
+        <p class="text-xs tracking-wide text-bg/55 mt-2 uppercase">Properties Closed</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl">100%</p>
+        <p class="text-xs tracking-wide text-bg/55 mt-2 uppercase">Client Satisfaction</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl">12+</p>
+        <p class="text-xs tracking-wide text-bg/55 mt-2 uppercase">Countries Served</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-bg/10 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-2 gap-12">
+      <div>
+        <p class="font-display text-3xl tracking-[0.12em] mb-3">G VISION</p>
+        <p class="text-xs text-bg/50 uppercase tracking-wide mb-8">Real estate advisory — your partner in every move.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-bg/20 flex items-center justify-center hover:bg-bg hover:text-ink transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
-          <a href="#" aria-label="Instagram" class="btn-primary w-10 h-10 rounded-full border border-bg/20 flex items-center justify-center hover:bg-accent hover:border-accent">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          <a href="#" aria-label="LinkedIn" class="w-10 h-10 rounded-full border border-bg/20 flex items-center justify-center hover:bg-bg hover:text-ink transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7 10v7M7 7v.01M11 17v-4.5a1.5 1.5 0 0 1 3 0V17M14 12.5a1.5 1.5 0 0 1 3 0V17" stroke-linecap="round"/></svg>
           </a>
-          <a href="#" aria-label="Facebook" class="btn-primary w-10 h-10 rounded-full border border-bg/20 flex items-center justify-center hover:bg-accent hover:border-accent">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.4h2.8l.4-3.3h-3.2V8.1c0-.95.27-1.6 1.63-1.6h1.74V3.5c-.3-.04-1.33-.13-2.53-.13-2.5 0-4.22 1.53-4.22 4.34v2.42H7.3v3.3h2.84V22h3.36z"/></svg>
+          <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-bg/20 flex items-center justify-center hover:bg-bg hover:text-ink transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M14 9h2V6h-2a3 3 0 0 0-3 3v2H9v3h2v6h3v-6h2l1-3h-3V9a1 1 0 0 1 1-1Z"/></svg>
           </a>
         </div>
       </div>
 
       <div>
-        <p class="text-xs uppercase tracking-wide text-bg/40 mb-5">Office</p>
-        <p class="text-sm text-bg/70 leading-[1.8]">[ Street Address ]<br>[ City, Country ]<br>[ Postal Code ]</p>
-      </div>
-
-      <div>
-        <p class="text-xs uppercase tracking-wide text-bg/40 mb-5">Contact</p>
-        <p class="text-sm text-bg/70 leading-[1.8]">
-          <a href="tel:+10000000000" class="hover:text-accent transition-colors">+1 (000) 000-0000</a><br>
-          <a href="mailto:gvision.agency@gmail.com" class="hover:text-accent transition-colors">gvision.agency@gmail.com</a>
-        </p>
-      </div>
-
-      <div>
-        <p class="text-xs uppercase tracking-wide text-bg/40 mb-5">Quick Links</p>
-        <ul class="text-sm text-bg/70 space-y-3">
-          <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
-          <li><a href="#about" class="hover:text-accent transition-colors">About</a></li>
-          <li><a href="#markets" class="hover:text-accent transition-colors">Markets</a></li>
-          <li><a href="#testimonials" class="hover:text-accent transition-colors">Testimonials</a></li>
-        </ul>
+        <h4 class="text-sm font-medium mb-4 text-bg/80">Office</h4>
+        <p class="text-sm text-bg/60 leading-relaxed mb-2">[ Office Address ]</p>
+        <p class="text-sm text-bg/60 leading-relaxed mb-2">[ Phone Number ]</p>
+        <p class="text-sm text-bg/60 leading-relaxed">gvision.agency@gmail.com</p>
       </div>
     </div>
 
-    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-bg/40">
-      <p>&copy; <span id="year"></span> G Vision. All rights reserved.</p>
-      <p>Domain &amp; hosting configured separately.</p>
+    <div class="border-t border-bg/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-bg/45">
+        <p>© 2026 G Vision. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+          <a href="#" class="hover:text-bg/80 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-bg/80 transition-colors">Terms of Service</a>
+        </div>
+      </div>
     </div>
   </div>
-</footer>
+</section>
+
+</main>
 
 <script>
-  // Mobile menu
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileNav = document.getElementById('mobileNav');
-  const bars = document.querySelectorAll('.menu-bar');
-  let menuOpen = false;
+  // Mobile nav toggle
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
   menuBtn.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    menuBtn.setAttribute('aria-expanded', menuOpen);
-    if (menuOpen) {
-      mobileNav.style.maxHeight = mobileNav.scrollHeight + 'px';
-      mobileNav.style.opacity = '1';
-      bars[0].style.transform = 'translateY(6px) rotate(45deg)';
-      bars[1].style.opacity = '0';
-      bars[2].style.transform = 'translateY(-6px) rotate(-45deg)';
-    } else {
-      mobileNav.style.maxHeight = '0px';
-      mobileNav.style.opacity = '0';
-      bars[0].style.transform = 'none';
-      bars[1].style.opacity = '1';
-      bars[2].style.transform = 'none';
-    }
-  });
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => menuBtn.click());
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    iconOpen.classList.toggle('hidden', isOpen);
+    iconClose.classList.toggle('hidden', !isOpen);
   });
 
-  // Fade-up on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
+  document.querySelectorAll('#mobile-menu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
     });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  });
 
-  // Testimonial slider
-  const track = document.getElementById('track');
-  const dots = document.querySelectorAll('.dot');
-  let slideIndex = 0;
-  function goToSlide(i) {
-    slideIndex = (i + dots.length) % dots.length;
-    track.style.transform = `translateX(-${slideIndex * 100}%)`;
-    dots.forEach((d, idx) => d.classList.toggle('bg-bg/30', idx !== slideIndex));
-    dots.forEach((d, idx) => d.classList.toggle('bg-bg', idx === slideIndex));
+  // Scroll-triggered fade-ins
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+  document.querySelectorAll('.fade-up').forEach((el) => revealObserver.observe(el));
+
+  // Accordion (About section)
+  document.querySelectorAll('.accordion-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      item.classList.toggle('open');
+    });
+  });
+
+  // Testimonials slider
+  const track = document.getElementById('slider-track');
+  const dots = Array.from(document.querySelectorAll('#slider-dots .dot'));
+  const prevBtn = document.getElementById('slider-prev');
+  const nextBtn = document.getElementById('slider-next');
+  const slideCount = 2;
+  let current = 0;
+
+  function goToSlide(index) {
+    current = (index + slideCount) % slideCount;
+    track.setAttribute('data-index', String(current));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
   }
-  document.getElementById('nextSlide').addEventListener('click', () => goToSlide(slideIndex + 1));
-  document.getElementById('prevSlide').addEventListener('click', () => goToSlide(slideIndex - 1));
-  dots.forEach(dot => dot.addEventListener('click', () => goToSlide(Number(dot.dataset.index))));
 
-  // Feedback form (front-end only demo)
-  const form = document.getElementById('feedbackForm');
+  prevBtn.addEventListener('click', () => goToSlide(current - 1));
+  nextBtn.addEventListener('click', () => goToSlide(current + 1));
+  dots.forEach((dot) => dot.addEventListener('click', () => goToSlide(Number(dot.dataset.slide))));
+
+  // Feedback form (front-end only)
+  const form = document.getElementById('feedback-form');
+  const successMsg = document.getElementById('feedback-success');
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    document.getElementById('formFields').classList.add('hidden');
-    document.getElementById('formSuccess').classList.remove('hidden');
+    successMsg.classList.remove('hidden');
+    successMsg.classList.add('flex');
+    form.reset();
   });
-
-  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>

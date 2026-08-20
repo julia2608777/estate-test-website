@@ -1,59 +1,64 @@
-# CLAUDE.md — Frontend Website Rules
-You are a senior UI designer and frontend developer.
-Build premium, dark-themed interfaces.
-Use subtle animations, proper spacing, and visual hierarchy.
-No emoji icons. No inline styles. No generic gradients.
+# CLAUDE.md
 
-## Always Do First
-- **Read `CLIENT_BRIEF.md`** at the start of every session, before anything else. If the brief is empty, run the intake (questions one at a time). If it's filled, use it as the source of truth.
-- **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Reference Images
-- If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
-- If no reference image: design from scratch with high craft (see guardrails below).
-- Screenshot your output, compare against reference, fix mismatches, re-screenshot. Do at least 2 comparison rounds. Stop only when no visible differences remain or user says so.
+## What this is
 
-## Local Server
-- **Always serve on localhost** — never screenshot a `file:///` URL.
-- Start the dev server: `node serve.mjs` (serves the project root at `http://localhost:3000`)
-- `serve.mjs` lives in the project root. Start it in the background before taking any screenshots.
-- If the server is already running, do not start a second instance.
+A single-page marketing/branding website for "G Vision" (name inferred from the project's contact
+email — confirm the real business/personal name before launch), a real-estate advisory business.
+There is no build system, package manager, or framework: `index.html` is the entire site.
 
-## Screenshot Workflow
-- Puppeteer is installed at `C:/Users/nateh/AppData/Local/Temp/puppeteer-test/`. Chrome cache is at `C:/Users/nateh/.cache/puppeteer/`.
-- **Always screenshot from localhost:** `node screenshot.mjs http://localhost:3000`
-- Screenshots are saved automatically to `./temporary screenshots/screenshot-N.png` (auto-incremented, never overwritten).
-- Optional label suffix: `node screenshot.mjs http://localhost:3000 label` → saves as `screenshot-N-label.png`
-- `screenshot.mjs` lives in the project root. Use it as-is.
-- After screenshotting, read the PNG from `temporary screenshots/` with the Read tool — Claude can see and analyze the image directly.
-- When comparing, be specific: "heading is 32px but reference shows ~24px", "card gap is 16px but should be 24px"
-- Check: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing
+## Running it
 
-## Output Defaults
-- Single `index.html` file, all styles inline, unless user says otherwise
-- Tailwind CSS via CDN: `<script src="https://cdn.tailwindcss.com"></script>`
-- Placeholder images: `https://placehold.co/WIDTHxHEIGHT`
-- Mobile-first responsive
+There is no dev server, build, lint, or test command in this repo. Neither Node nor a working Python
+is available in this environment as of this writing (`python` resolves to a broken Windows Store
+stub, `node` is not installed) — do not assume `node serve.mjs`, `npm run *`, or similar will work
+without first confirming the tool is actually installed.
 
-## Brand Assets
-- Always check the `brand_assets/` folder before designing. It may contain logos, color guides, style guides, or images.
-- If assets exist there, use them. Do not use placeholders where real assets are available.
-- If a logo is present, use it. If a color palette is defined, use those exact values — do not invent brand colors.
+To preview: open `index.html` directly in a browser. All image paths are relative, so this works
+from `file://` as well as from any static file server.
 
-## Anti-Generic Guardrails
-- **Colors:** Never use default Tailwind palette (indigo-500, blue-600, etc.). Pick a custom brand color and derive from it.
-- **Shadows:** Never use flat `shadow-md`. Use layered, color-tinted shadows with low opacity.
-- **Typography:** Never use the same font for headings and body. Pair a display/serif with a clean sans. Apply tight tracking (`-0.03em`) on large headings, generous line-height (`1.7`) on body.
-- **Gradients:** Layer multiple radial gradients. Add grain/texture via SVG noise filter for depth.
-- **Animations:** Only animate `transform` and `opacity`. Never `transition-all`. Use spring-style easing.
-- **Interactive states:** Every clickable element needs hover, focus-visible, and active states. No exceptions.
-- **Images:** Add a gradient overlay (`bg-gradient-to-t from-black/60`) and a color treatment layer with `mix-blend-multiply`.
-- **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
-- **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
+## Architecture
 
-## Hard Rules
-- Do not add sections, features, or content not in the reference
-- Do not "improve" a reference design — match it
-- Do not stop after one screenshot pass
-- Do not use `transition-all`
-- Do not use default Tailwind blue/indigo as primary color
+Everything lives in `index.html`:
+- **Styling**: Tailwind CSS via CDN (`<script src="https://cdn.tailwindcss.com">`) with an inline
+  `tailwind.config` extending the default theme with the project's color tokens (`bg`, `bgalt`,
+  `surface`, `ink`, `inksoft`, `muted`, `line`, `accent`, `accentdark`, `accentlight`) and font
+  families (`font-display` = Fraunces, `font-sans` = Inter, loaded from Google Fonts). Reuse these
+  tokens rather than introducing new ad-hoc colors.
+- **Layout**: one `<section>` per page block, in this fixed order: Header → Hero → Services → Call
+  to Action → About You → Partners & Countries of Operation → Work Process → Testimonials →
+  Feedback Form → Contacts. This order matches the client brief (`brief.docx`) and should be
+  preserved unless the user asks to reorder.
+- **JS**: a single inline `<script>` at the bottom of the file handles the mobile nav toggle,
+  scroll-triggered fade-ins (`IntersectionObserver` + `.fade-up`/`.in-view`), the testimonials
+  slider (two slide groups, prev/next + dots), and the feedback form (front-end only — `preventDefault`
+  + show a success message, no backend wired up).
+- **Custom CSS** (shadows, grain/noise texture, fade-up transition, slider transform) lives in the
+  `<style>` block in `<head>`, not inline on elements.
+
+## Assets
+
+- `photos/IMG_8001.JPG`–`IMG_8006.JPG` — property/lifestyle stock imagery used across the CTA,
+  Partners & Countries, and Feedback sections.
+- `IMG_7992.JPG`, `IMG_7993.PNG`, `IMG_4913.PNG` (project root) — portrait/collage photos of the
+  person the site is built around, used in Hero and About You.
+- `zonora-template.webflow.io_ (1).png` — the visual design reference the layout, spacing, and
+  component style were built to follow. Consult this before changing section layout or styling.
+- `brief.docx` — the original client brief (site goal, section list, asset list). Extract text with
+  a zip/XML read if needed (it's a `.docx`, i.e. a zip of XML — `Expand-Archive` requires renaming
+  the copy to `.zip` first on Windows).
+
+Note: several of the source photos are AI-generated and show visible artifacts (e.g. garbled
+document text reading "Title Deaths" instead of "Title Deeds" in `IMG_8002.JPG`) — the user has
+chosen to use them as-is; this is a known, accepted tradeoff, not a bug to silently fix.
+
+## Known placeholder content
+
+The following are intentionally fake and still need real information before this goes live —
+don't treat them as settled facts about the business:
+- Country/market names in the Partners & Countries section (`[ Country Name ]` placeholders)
+- Partner logos (placehold.co placeholders)
+- Testimonial quotes and names
+- Phone number, office address
+- The feedback form has no backend/email integration yet
