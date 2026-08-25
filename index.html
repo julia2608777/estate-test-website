@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olena Globa — International Real Estate Consultant</title>
+<meta name="description" content="Olena Globa helps clients select, invest in, and relocate to international real estate across Spain, Bulgaria, Northern Cyprus, Georgia and Thailand — with 25+ years of expertise and full transaction support.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#ffffff',
+          bgalt: '#f5f5f3',
+          surface: '#ffffff',
+          ink: '#111111',
+          inksoft: '#414141',
+          muted: '#737373',
+          mutedlight: '#a5a5a5',
+          line: '#cacaca',
+          accent: '#111111',
+          accentdark: '#000000',
+          accentlight: '#eeeeec',
+        },
+        fontFamily: {
+          display: ['"DM Sans"', 'sans-serif'],
+          sans: ['"DM Sans"', 'sans-serif'],
+        },
+        maxWidth: {
+          content: '1340px',
+        },
+      },
+    },
+  };
+</script>
+<style>
+  :root{
+    --primary:#111111;
+    --white:#ffffff;
+    --light-gray:#a5a5a5;
+    --gray:#737373;
+    --black-border:#464646;
+    --border:#cacaca;
+    --tablet-spacing:100px;
+    --mobile-landscape-spacing:80px;
+    --mobile-portrait-spacing:60px;
+    --image-background:lightgrey;
+    --desktop-spacing:150px;
+    --body-font:#414141;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{
+    color:var(--body-font);
+    font-family:'DM Sans',sans-serif;
+    font-weight:400;
+    line-height:160%;
+    background:var(--white);
+    overflow-x:hidden;
+  }
+
+  .section-pad{
+    padding-top:var(--mobile-portrait-spacing);
+    padding-bottom:var(--mobile-portrait-spacing);
+  }
+  @media (min-width:768px){
+    .section-pad{
+      padding-top:var(--tablet-spacing);
+      padding-bottom:var(--tablet-spacing);
+    }
+  }
+  @media (min-width:1280px){
+    .section-pad{
+      padding-top:var(--desktop-spacing);
+      padding-bottom:var(--desktop-spacing);
+    }
+  }
+
+  /* subtle grain / noise texture */
+  .grain{position:relative;}
+  .grain::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.06;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .shadow-soft{ box-shadow: 0 1px 2px rgba(17,17,17,.04), 0 12px 32px -16px rgba(17,17,17,.18); }
+  .shadow-card:hover{ box-shadow: 0 20px 40px -20px rgba(17,17,17,.35); }
+
+  .text-divider{
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+
+  .fade-up{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .8s ease, transform .8s ease;
+    will-change:opacity, transform;
+  }
+  .fade-up.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .btn-primary{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    background:var(--primary);color:var(--white);
+    padding:.9rem 1.9rem;border-radius:9999px;
+    font-size:.875rem;font-weight:600;letter-spacing:.02em;
+    transition:background .25s ease, transform .25s ease;
+  }
+  .btn-primary:hover{ background:#2b2b2b; transform:translateY(-1px); }
+
+  .btn-outline{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    background:transparent;color:var(--primary);
+    border:1px solid var(--black-border);
+    padding:.9rem 1.9rem;border-radius:9999px;
+    font-size:.875rem;font-weight:600;letter-spacing:.02em;
+    transition:background .25s ease, color .25s ease;
+  }
+  .btn-outline:hover{ background:var(--primary); color:var(--white); }
+
+  .btn-outline-light{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    background:transparent;color:#fff;
+    border:1px solid rgba(255,255,255,.55);
+    padding:.9rem 1.9rem;border-radius:9999px;
+    font-size:.875rem;font-weight:600;letter-spacing:.02em;
+    transition:background .25s ease, color .25s ease;
+  }
+  .btn-outline-light:hover{ background:#fff; color:#111; }
+
+  #testiTrack{ display:flex; width:200%; transition:transform .6s cubic-bezier(.65,0,.35,1); }
+  .testi-slide{ width:50%; flex-shrink:0; }
+
+  .dot{ width:8px;height:8px;border-radius:9999px;background:var(--border);transition:background .25s ease, width .25s ease; }
+  .dot.active{ background:var(--primary); width:22px; }
+
+  input:focus, textarea:focus, select:focus{ outline:none; border-color:#111; box-shadow:0 0 0 3px rgba(17,17,17,.08); }
+
+  .stat-num{ font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body class="bg-bg text-inksoft antialiased">
+
+<!-- ============ HEADER ============ -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-line">
+  <div class="max-w-content mx-auto px-6 md:px-10 flex items-center justify-between h-20">
+    <a href="#hero" class="font-display font-semibold text-lg tracking-[0.08em] text-ink uppercase">Olena&nbsp;Globa</a>
+
+    <nav class="hidden lg:flex items-center gap-9 text-sm font-medium text-inksoft">
+      <a href="#services" class="hover:text-ink transition-colors">Services</a>
+      <a href="#about" class="hover:text-ink transition-colors">About</a>
+      <a href="#countries" class="hover:text-ink transition-colors">Countries</a>
+      <a href="#process" class="hover:text-ink transition-colors">Process</a>
+      <a href="#testimonials" class="hover:text-ink transition-colors">Testimonials</a>
+      <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+    </nav>
+
+    <a href="#feedback" class="btn-primary hidden lg:inline-flex">Book a Consultation</a>
+
+    <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false" class="lg:hidden w-10 h-10 flex items-center justify-center text-ink">
+      <svg id="menuIconOpen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-6 h-6"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="menuIconClose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="w-6 h-6 hidden"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-line bg-white">
+    <nav class="flex flex-col px-6 py-6 gap-1 text-sm font-medium text-inksoft">
+      <a href="#services" class="mobile-link py-3 border-b border-line">Services</a>
+      <a href="#about" class="mobile-link py-3 border-b border-line">About</a>
+      <a href="#countries" class="mobile-link py-3 border-b border-line">Countries</a>
+      <a href="#process" class="mobile-link py-3 border-b border-line">Process</a>
+      <a href="#testimonials" class="mobile-link py-3 border-b border-line">Testimonials</a>
+      <a href="#contact" class="mobile-link py-3">Contact</a>
+      <a href="#feedback" class="mobile-link btn-primary text-center mt-4">Book a Consultation</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="hero" class="relative min-h-[92vh] flex items-end overflow-hidden grain">
+  <video class="absolute inset-0 w-full h-full object-cover object-top" autoplay muted loop playsinline poster="IMG_7992.JPG">
+    <source src="IMG_8166.MP4" type="video/mp4">
+  </video>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35"></div>
+
+  <div class="relative z-10 w-full min-w-0 max-w-content mx-auto px-6 md:px-10 pt-40 pb-14 text-white">
+    <div class="fade-up inline-flex items-center gap-3 bg-white/10 border border-white/25 rounded-full pl-1.5 pr-5 py-1.5 mb-8 backdrop-blur-sm">
+      <img src="IMG_7992.JPG" alt="Olena Globa" class="w-9 h-9 rounded-full object-cover object-top">
+      <span class="text-xs sm:text-sm font-medium tracking-wide">Olena Globa &middot; 25+ Years in Real Estate</span>
+    </div>
+
+    <h1 class="fade-up font-display font-semibold text-[2.5rem] leading-[1.08] sm:text-6xl md:text-7xl max-w-3xl" style="transition-delay:.05s">
+      Find the country, the home, and the life that truly fit you.
+    </h1>
+
+    <p class="fade-up mt-6 max-w-xl text-base sm:text-lg text-white/85" style="transition-delay:.12s">
+      &ldquo;I help people not just buy real estate, but choose the country and lifestyle that truly match their needs and dreams.&rdquo;
+    </p>
+
+    <div class="fade-up mt-9 flex flex-wrap gap-4" style="transition-delay:.18s">
+      <a href="#feedback" class="btn-primary bg-white !text-ink hover:bg-white/90">Book a Free Consultation</a>
+      <a href="#countries" class="btn-outline-light">Explore Countries</a>
+    </div>
+
+    <!-- quick country selector -->
+    <div class="fade-up mt-10 max-w-xl bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-3 shadow-soft" style="transition-delay:.24s">
+      <label class="sr-only" for="countrySelect">Where would you like to buy property?</label>
+      <select id="countrySelect" class="flex-1 min-w-0 w-full text-ink text-sm sm:text-base rounded-xl border border-line px-4 py-3 bg-white">
+        <option value="">Where would you like to buy property?</option>
+        <option value="country-spain">Spain</option>
+        <option value="country-bulgaria">Bulgaria</option>
+        <option value="country-cyprus">Northern Cyprus</option>
+        <option value="country-georgia">Georgia</option>
+        <option value="country-thailand">Thailand</option>
+      </select>
+      <button id="countryGoBtn" type="button" class="btn-primary whitespace-nowrap">View Market</button>
+    </div>
+
+    <div class="fade-up mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl border-t border-white/20 pt-8" style="transition-delay:.3s">
+      <div>
+        <div class="stat-num font-display text-3xl font-semibold">25+</div>
+        <div class="text-xs sm:text-sm text-white/70 mt-1">Years of experience</div>
+      </div>
+      <div>
+        <div class="stat-num font-display text-3xl font-semibold">5</div>
+        <div class="text-xs sm:text-sm text-white/70 mt-1">Countries of operation</div>
+      </div>
+      <div>
+        <div class="stat-num font-display text-3xl font-semibold">4</div>
+        <div class="text-xs sm:text-sm text-white/70 mt-1">Languages spoken</div>
+      </div>
+      <div>
+        <div class="stat-num font-display text-3xl font-semibold">100%</div>
+        <div class="text-xs sm:text-sm text-white/70 mt-1">Personal attention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="section-pad bg-bg">
+  <div class="max-w-content mx-auto px-6 md:px-10">
+    <div class="max-w-2xl fade-up">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Services</span>
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl md:text-5xl text-ink mt-3">Real estate expertise across borders</h2>
+      <p class="mt-4 text-inksoft">From your very first idea of living abroad to the keys in your hand — and everything that comes after — I guide the entire journey personally, one client at a time.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6 mt-14">
+      <div class="fade-up bg-surface border border-line rounded-2xl p-8" style="transition-delay:.05s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-9 h-9 text-ink mb-5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+        <h3 class="font-display font-semibold text-lg text-ink">Global market knowledge</h3>
+        <p class="mt-2 text-sm text-inksoft">25+ years of hands-on experience, including years managing a full-service agency, now applied across five international markets.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-8" style="transition-delay:.1s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-9 h-9 text-ink mb-5"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3-6 7-6s7 2.7 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c2.8.3 5 2.6 5 6"/></svg>
+        <h3 class="font-display font-semibold text-lg text-ink">Client-first approach</h3>
+        <p class="mt-2 text-sm text-inksoft">Every recommendation is shaped around your budget, climate preferences, tax situation, and long-term goals — never a one-size-fits-all listing.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-8" style="transition-delay:.15s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-9 h-9 text-ink mb-5"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>
+        <h3 class="font-display font-semibold text-lg text-ink">Full-service support</h3>
+        <p class="mt-2 text-sm text-inksoft">From due diligence and negotiations to relocation, residency, and after-sales care — one point of contact for the whole process.</p>
+      </div>
+    </div>
+
+    <div class="fade-up grid grid-cols-3 gap-4 mt-6 h-48 sm:h-64 md:h-80">
+      <img src="photos/IMG_8002.JPG" alt="Keys and investment documents at sunset by a modern home" class="w-full h-full object-cover object-top rounded-2xl">
+      <img src="photos/IMG_8003.JPG" alt="Modern residential towers at dusk" class="w-full h-full object-cover object-top rounded-2xl">
+      <img src="photos/IMG_8004.JPG" alt="A curated global property portfolio" class="w-full h-full object-cover object-top rounded-2xl">
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
+      <div class="fade-up bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+        <h3 class="font-display font-semibold text-ink">International property selection</h3>
+        <p class="mt-2 text-sm text-inksoft">Apartments, houses, villas, land for development, and commercial real estate — matched precisely to your brief.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow" style="transition-delay:.04s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg>
+        <h3 class="font-display font-semibold text-ink">Country &amp; relocation matching</h3>
+        <p class="mt-2 text-sm text-inksoft">An individual country selection tailored to your budget, climate, tax system, standard of living, and personal goals.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow" style="transition-delay:.08s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+        <h3 class="font-display font-semibold text-ink">Investment advisory</h3>
+        <p class="mt-2 text-sm text-inksoft">Assistance choosing properties built for profit generation and capital preservation, not just lifestyle appeal.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow" style="transition-delay:.12s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><path d="M6 3h9l4 4v14H6z"/><path d="M9 13l2 2 4-4"/></svg>
+        <h3 class="font-display font-semibold text-ink">Full transaction support</h3>
+        <p class="mt-2 text-sm text-inksoft">Complete guidance from property selection through document execution to key handover.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow" style="transition-delay:.16s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><path d="M3 12l18-7-7 18-2-8-8-3z"/></svg>
+        <h3 class="font-display font-semibold text-ink">Relocation &amp; adaptation</h3>
+        <p class="mt-2 text-sm text-inksoft">Residency consultations, bank accounts, document preparation, and guidance on temporary or permanent residence permits where available.</p>
+      </div>
+      <div class="fade-up bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow" style="transition-delay:.2s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3-6 7-6s7 2.7 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c2.8.3 5 2.6 5 6"/></svg>
+        <h3 class="font-display font-semibold text-ink">Vetted developers &amp; partners</h3>
+        <p class="mt-2 text-sm text-inksoft">A curated network of verified developers and local partners in every country I work in.</p>
+      </div>
+      <div class="fade-up sm:col-span-2 lg:col-span-1 bg-surface border border-line rounded-2xl p-7 shadow-card transition-shadow" style="transition-delay:.24s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-ink mb-4"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M14 9l2 2"/></svg>
+        <h3 class="font-display font-semibold text-ink">After-sales support</h3>
+        <p class="mt-2 text-sm text-inksoft">Help with furnishing, renovation, rental listing, and property management whenever you need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALL TO ACTION ============ -->
+<section id="trust" class="bg-bgalt">
+  <div class="max-w-content mx-auto md:px-10">
+    <div class="grid md:grid-cols-2 items-stretch">
+      <div class="fade-up relative aspect-[832/1248] md:aspect-auto md:h-[620px]">
+        <img src="IMG_8162.JPG" alt="Olena Globa welcoming a client at a property door" class="absolute inset-0 w-full h-full object-cover object-top">
+      </div>
+      <div class="fade-up flex flex-col justify-between text-divider px-6 md:px-12 py-12 md:py-14" style="transition-delay:.08s">
+        <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Why work with me</span>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl text-ink mt-4">Earning your trust through professionalism</h2>
+        <p class="mt-4 text-inksoft">Your reliable partner in real estate, ready to guide you safely at every stage — from the first consultation to receiving the keys.</p>
+        <ul class="mt-7 space-y-4">
+          <li class="flex items-start gap-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 shrink-0 text-ink"><path d="M5 13l4 4L19 7"/></svg>
+            <span><span class="font-semibold text-ink">Individual approach</span> — no two clients, and no two plans, are the same.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 shrink-0 text-ink"><path d="M5 13l4 4L19 7"/></svg>
+            <span><span class="font-semibold text-ink">Comprehensive service</span> — from country selection to after-sales support.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-0.5 shrink-0 text-ink"><path d="M5 13l4 4L19 7"/></svg>
+            <span><span class="font-semibold text-ink">Honest, safe guidance</span> — clear information at every step of the transaction.</span>
+          </li>
+        </ul>
+        <a href="#feedback" class="btn-primary mt-8 w-fit">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT YOU ============ -->
+<section id="about" class="section-pad bg-bg">
+  <div class="max-w-content mx-auto md:px-10">
+    <div class="grid md:grid-cols-2 items-stretch md:px-0">
+      <div class="fade-up order-2 md:order-1 flex flex-col justify-center text-divider px-6 md:pl-10 md:pr-12 py-12 md:py-0">
+        <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">About me</span>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl text-ink mt-4">25+ years guiding people home</h2>
+        <p class="mt-4 text-inksoft">For many years, I managed a real estate agency in Ukraine, successfully guiding transactions across residential, commercial, and investment property. Today I work in the international market, collaborating with vetted developers and partners across different countries.</p>
+        <p class="mt-4 text-inksoft">I help clients not only find real estate, but also choose the country that best suits their goals and capabilities — because the right property only matters if it comes with the right life around it.</p>
+
+        <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-line">
+          <div>
+            <div class="stat-num font-display text-2xl sm:text-3xl font-semibold text-ink">25+</div>
+            <div class="text-xs text-muted mt-1">Years in real estate</div>
+          </div>
+          <div>
+            <div class="stat-num font-display text-2xl sm:text-3xl font-semibold text-ink">5</div>
+            <div class="text-xs text-muted mt-1">Countries covered</div>
+          </div>
+          <div>
+            <div class="stat-num font-display text-2xl sm:text-3xl font-semibold text-ink">4</div>
+            <div class="text-xs text-muted mt-1">Languages spoken</div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <span class="px-4 py-2 rounded-full bg-accentlight text-xs font-semibold tracking-wide text-ink">Honesty</span>
+          <span class="px-4 py-2 rounded-full bg-accentlight text-xs font-semibold tracking-wide text-ink">Individual approach</span>
+          <span class="px-4 py-2 rounded-full bg-accentlight text-xs font-semibold tracking-wide text-ink">Safe guidance</span>
+        </div>
+      </div>
+      <div class="fade-up order-1 md:order-2 aspect-[912/1136] md:aspect-auto md:h-auto" style="transition-delay:.08s">
+        <img src="IMG_8163.JPG" alt="Olena Globa working with a client at her desk" class="w-full h-full object-cover object-top">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS & COUNTRIES OF OPERATION ============ -->
+<section id="countries" class="section-pad bg-bgalt">
+  <div class="max-w-content mx-auto px-6 md:px-10">
+    <div class="max-w-2xl fade-up">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Countries of operation</span>
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl md:text-5xl text-ink mt-3">Where I work</h2>
+      <p class="mt-4 text-inksoft">Five markets, chosen for their lifestyle, value, and long-term potential — each backed by a network of vetted local partners.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+      <div id="country-spain" class="fade-up bg-surface border border-line rounded-2xl p-7">
+        <span class="text-3xl">🇪🇸</span>
+        <h3 class="font-display font-semibold text-lg text-ink mt-4">Spain</h3>
+        <p class="mt-2 text-sm text-inksoft">Mediterranean lifestyle, strong rental yields on the Costa Blanca and Costa del Sol, and residency-by-investment pathways.</p>
+      </div>
+      <div id="country-bulgaria" class="fade-up bg-surface border border-line rounded-2xl p-7" style="transition-delay:.04s">
+        <span class="text-3xl">🇧🇬</span>
+        <h3 class="font-display font-semibold text-lg text-ink mt-4">Bulgaria</h3>
+        <p class="mt-2 text-sm text-inksoft">Affordable Black Sea coastal property, EU membership, and a low cost of living with favorable taxation.</p>
+      </div>
+      <div id="country-cyprus" class="fade-up bg-surface border border-line rounded-2xl p-7" style="transition-delay:.08s">
+        <span class="text-3xl">🇨🇾</span>
+        <h3 class="font-display font-semibold text-lg text-ink mt-4">Northern Cyprus</h3>
+        <p class="mt-2 text-sm text-inksoft">A fast-growing market with attractive prices per square meter, year-round sun, and a straightforward purchase process for foreigners.</p>
+      </div>
+      <div id="country-georgia" class="fade-up bg-surface border border-line rounded-2xl p-7" style="transition-delay:.12s">
+        <span class="text-3xl">🇬🇪</span>
+        <h3 class="font-display font-semibold text-lg text-ink mt-4">Georgia</h3>
+        <p class="mt-2 text-sm text-inksoft">No purchase restrictions for foreign buyers, a fast-growing Tbilisi and Batumi market, and a simple, low tax regime.</p>
+      </div>
+      <div id="country-thailand" class="fade-up bg-surface border border-line rounded-2xl p-7" style="transition-delay:.16s">
+        <span class="text-3xl">🇹🇭</span>
+        <h3 class="font-display font-semibold text-lg text-ink mt-4">Thailand</h3>
+        <p class="mt-2 text-sm text-inksoft">Tropical lifestyle with strong tourist rental demand in Phuket and Bangkok — a popular retirement and relocation destination.</p>
+      </div>
+      <div class="fade-up bg-ink text-white rounded-2xl p-7 flex flex-col justify-center" style="transition-delay:.2s">
+        <p class="text-sm text-white/80">More countries are added regularly as trusted partnerships grow.</p>
+        <a href="#feedback" class="mt-4 text-sm font-semibold underline underline-offset-4 hover:text-white/80 w-fit">Ask about a specific destination &rarr;</a>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-10 border-t border-line">
+      <div class="fade-up max-w-2xl">
+        <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Partners</span>
+        <h3 class="font-display font-semibold text-2xl sm:text-3xl text-ink mt-3">Vetted developers &amp; partners</h3>
+        <p class="mt-3 text-inksoft text-sm sm:text-base">I work only with verified, licensed developers and local partners in every market — so every recommendation is backed by due diligence.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
+        <div class="fade-up flex items-center justify-center text-center bg-surface border border-line rounded-xl h-24 px-3">
+          <span class="font-display text-sm font-semibold tracking-wide text-ink">Costa Vantage<br>Developments</span>
+        </div>
+        <div class="fade-up flex items-center justify-center text-center bg-surface border border-line rounded-xl h-24 px-3" style="transition-delay:.03s">
+          <span class="font-display text-sm font-semibold tracking-wide text-ink">Sunview<br>Properties</span>
+        </div>
+        <div class="fade-up flex items-center justify-center text-center bg-surface border border-line rounded-xl h-24 px-3" style="transition-delay:.06s">
+          <span class="font-display text-sm font-semibold tracking-wide text-ink">Levant Coast<br>Realty</span>
+        </div>
+        <div class="fade-up flex items-center justify-center text-center bg-surface border border-line rounded-xl h-24 px-3" style="transition-delay:.09s">
+          <span class="font-display text-sm font-semibold tracking-wide text-ink">Tbilisi Prime<br>Estates</span>
+        </div>
+        <div class="fade-up flex items-center justify-center text-center bg-surface border border-line rounded-xl h-24 px-3" style="transition-delay:.12s">
+          <span class="font-display text-sm font-semibold tracking-wide text-ink">Siam Horizon<br>Group</span>
+        </div>
+        <div class="fade-up flex items-center justify-center text-center bg-surface border border-line rounded-xl h-24 px-3" style="transition-delay:.15s">
+          <span class="font-display text-sm font-semibold tracking-wide text-ink">Nordic Bridge<br>Advisory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK PROCESS ============ -->
+<section id="process" class="bg-bg">
+  <div class="max-w-content mx-auto md:px-10">
+    <div class="grid md:grid-cols-2 items-stretch">
+      <div class="fade-up flex flex-col justify-between text-divider px-6 md:pl-10 md:pr-12 py-12 md:py-16">
+        <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Work process</span>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl text-ink mt-4">From first call to keys in hand</h2>
+        <p class="mt-3 text-inksoft text-sm sm:text-base">My goal is to make buying real estate abroad as simple, safe, and comfortable as possible — with professional guidance at every stage.</p>
+
+        <ol class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mt-8 text-sm">
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">01</span><span><span class="font-semibold text-ink block">Initial consultation</span>Goals, budget, and preferences.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">02</span><span><span class="font-semibold text-ink block">Country &amp; region selection</span>Matched to your plans.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">03</span><span><span class="font-semibold text-ink block">Property selection</span>Curated from vetted partners.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">04</span><span><span class="font-semibold text-ink block">Presentation &amp; comparison</span>Clear pros and cons.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">05</span><span><span class="font-semibold text-ink block">Viewings</span>Online or in person.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">06</span><span><span class="font-semibold text-ink block">Legal due diligence</span>With trusted local lawyers.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">07</span><span><span class="font-semibold text-ink block">Negotiation &amp; reservation</span>Best price and terms.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">08</span><span><span class="font-semibold text-ink block">Transaction support</span>Contracts, payments, registration.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">09</span><span><span class="font-semibold text-ink block">Handover</span>Documents and keys, together.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">10</span><span><span class="font-semibold text-ink block">After-sales support</span>Furnishing, rental, relocation.</span></li>
+        </ol>
+      </div>
+      <div class="fade-up relative aspect-[1376/768] md:aspect-auto md:h-[640px]" style="transition-delay:.08s">
+        <img src="IMG_8375.JPG" alt="Olena Globa reviewing a property listing with a client" class="absolute inset-0 w-full h-full object-cover object-top">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section id="testimonials" class="section-pad bg-bgalt">
+  <div class="max-w-content mx-auto px-6 md:px-10">
+    <div class="max-w-2xl fade-up">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Testimonials</span>
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl md:text-5xl text-ink mt-3">What my clients say</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch mt-12">
+      <div class="fade-up h-64 lg:h-auto">
+        <img src="photos/IMG_8005.JPG" alt="Welcome card and keys on a kitchen counter after a successful handover" class="w-full h-full object-cover object-top rounded-2xl">
+      </div>
+
+      <div class="fade-up overflow-hidden text-divider flex flex-col justify-center py-8" style="transition-delay:.08s">
+        <div class="overflow-hidden">
+          <div id="testiTrack">
+            <div class="testi-slide grid sm:grid-cols-1 gap-6 pr-1">
+              <blockquote class="pb-6 border-b border-line">
+                <div class="flex gap-1 text-ink mb-3">★★★★★</div>
+                <p class="text-ink text-base sm:text-lg font-display">&ldquo;Olena helped us find a villa in Spain that matched our budget and lifestyle perfectly. Every step, from viewing to notary, was handled with total honesty.&rdquo;</p>
+                <footer class="mt-3 text-sm text-muted">Markus Lindqvist — Oslo, Norway</footer>
+              </blockquote>
+              <blockquote class="pb-6 border-b border-line">
+                <div class="flex gap-1 text-ink mb-3">★★★★★</div>
+                <p class="text-ink text-base sm:text-lg font-display">&ldquo;I was looking for an investment property, not just a home. Olena's advice on rental yield and taxes in Bulgaria saved me from a costly mistake.&rdquo;</p>
+                <footer class="mt-3 text-sm text-muted">Kateryna Boiko — Kyiv, Ukraine</footer>
+              </blockquote>
+              <blockquote>
+                <div class="flex gap-1 text-ink mb-3">★★★★★</div>
+                <p class="text-ink text-base sm:text-lg font-display">&ldquo;Relocating to Northern Cyprus felt overwhelming until we started working with Olena. She managed every document and introduced us to a wonderful community.&rdquo;</p>
+                <footer class="mt-3 text-sm text-muted">James Whitfield — London, United Kingdom</footer>
+              </blockquote>
+            </div>
+            <div class="testi-slide grid sm:grid-cols-1 gap-6 pl-1">
+              <blockquote class="pb-6 border-b border-line">
+                <div class="flex gap-1 text-ink mb-3">★★★★★</div>
+                <p class="text-ink text-base sm:text-lg font-display">&ldquo;Georgia wasn't even on our radar until Olena explained the tax benefits and ease of purchase. Two years later, it's our best-performing property.&rdquo;</p>
+                <footer class="mt-3 text-sm text-muted">Sara Andersen — Bergen, Norway</footer>
+              </blockquote>
+              <blockquote class="pb-6 border-b border-line">
+                <div class="flex gap-1 text-ink mb-3">★★★★★</div>
+                <p class="text-ink text-base sm:text-lg font-display">&ldquo;We wanted a slower pace of life for retirement. Olena guided us to Thailand and handled everything, right down to furnishing the apartment.&rdquo;</p>
+                <footer class="mt-3 text-sm text-muted">David &amp; Emily Carter — Manchester, United Kingdom</footer>
+              </blockquote>
+              <blockquote>
+                <div class="flex gap-1 text-ink mb-3">★★★★★</div>
+                <p class="text-ink text-base sm:text-lg font-display">&ldquo;Beyond the property itself, Olena helped me understand the residency process in Spain. Her honesty and attention to detail made all the difference.&rdquo;</p>
+                <footer class="mt-3 text-sm text-muted">Olga Petrenko — Warsaw, Poland</footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-8">
+          <div class="flex gap-2">
+            <button id="dot0" class="dot active" aria-label="Show testimonials group 1"></button>
+            <button id="dot1" class="dot" aria-label="Show testimonials group 2"></button>
+          </div>
+          <div class="flex gap-3">
+            <button id="prevBtn" aria-label="Previous" class="w-10 h-10 rounded-full border border-line flex items-center justify-center hover:bg-ink hover:text-white hover:border-ink transition-colors">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button id="nextBtn" aria-label="Next" class="w-10 h-10 rounded-full border border-line flex items-center justify-center hover:bg-ink hover:text-white hover:border-ink transition-colors">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEEDBACK FORM ============ -->
+<section id="feedback" class="section-pad bg-bg">
+  <div class="max-w-content mx-auto px-6 md:px-10">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+      <div class="fade-up h-64 lg:h-auto">
+        <img src="photos/IMG_8001.JPG" alt="Consultation desk with property plans and financial charts" class="w-full h-full object-cover object-top rounded-2xl">
+      </div>
+
+      <div class="fade-up flex flex-col justify-center text-divider py-10" style="transition-delay:.08s">
+        <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">Get in touch</span>
+        <h2 class="font-display font-semibold text-3xl sm:text-4xl text-ink mt-3">Let's talk about your move</h2>
+        <p class="mt-3 text-inksoft text-sm sm:text-base">Tell me a little about what you're looking for, and I'll get back to you personally within one business day.</p>
+
+        <form id="feedbackForm" class="mt-8 space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="fbName" class="text-sm font-medium text-ink">Full name</label>
+              <input id="fbName" name="name" type="text" required placeholder="Your name" class="mt-2 w-full rounded-xl border border-line px-4 py-3 text-sm">
+            </div>
+            <div>
+              <label for="fbEmail" class="text-sm font-medium text-ink">Email</label>
+              <input id="fbEmail" name="email" type="email" required placeholder="you@example.com" class="mt-2 w-full rounded-xl border border-line px-4 py-3 text-sm">
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="fbPhone" class="text-sm font-medium text-ink">Phone / WhatsApp</label>
+              <input id="fbPhone" name="phone" type="tel" placeholder="+1 234 567 890" class="mt-2 w-full rounded-xl border border-line px-4 py-3 text-sm">
+            </div>
+            <div>
+              <label for="fbCountry" class="text-sm font-medium text-ink">Country of interest</label>
+              <select id="fbCountry" name="country" class="mt-2 w-full rounded-xl border border-line px-4 py-3 text-sm bg-white">
+                <option value="">Select a country</option>
+                <option>Spain</option>
+                <option>Bulgaria</option>
+                <option>Northern Cyprus</option>
+                <option>Georgia</option>
+                <option>Thailand</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="fbMessage" class="text-sm font-medium text-ink">Message</label>
+            <textarea id="fbMessage" name="message" rows="4" placeholder="Tell me about your goals, timeline, and budget..." class="mt-2 w-full rounded-xl border border-line px-4 py-3 text-sm resize-none"></textarea>
+          </div>
+          <label class="flex items-start gap-3 text-xs text-muted">
+            <input type="checkbox" required class="mt-0.5">
+            I agree that my information will be used to respond to my enquiry.
+          </label>
+          <button type="submit" class="btn-primary w-full sm:w-fit">Send Message</button>
+        </form>
+
+        <div id="feedbackSuccess" class="hidden mt-4 rounded-xl border border-line bg-accentlight px-5 py-4 text-sm text-ink">
+          <span class="font-semibold">Thank you — your message has been sent.</span> I'll be in touch personally within one business day.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTS ============ -->
+<section id="contact" class="section-pad bg-ink text-white grain">
+  <div class="max-w-content mx-auto px-6 md:px-10">
+    <div class="max-w-2xl fade-up">
+      <span class="text-xs font-semibold tracking-[0.18em] uppercase text-white/60">Contact</span>
+      <h2 class="font-display font-semibold text-3xl sm:text-4xl md:text-5xl mt-3">Ready to start?</h2>
+      <p class="mt-4 text-white/75">Contact me in any convenient way. The first consultation is free — I will gladly help you find real estate that meets your goals and expectations.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-10 mt-14">
+      <div class="fade-up">
+        <h3 class="font-display font-semibold text-lg">Olena Globa</h3>
+        <p class="text-sm text-white/60 mt-1">International Real Estate Consultant</p>
+        <div class="mt-6 space-y-3 text-sm">
+          <a href="mailto:globaolena@gmail.com" class="flex items-center gap-3 hover:text-white/70 transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5 shrink-0"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            globaolena@gmail.com
+          </a>
+          <a href="tel:+4796682910" class="flex items-center gap-3 hover:text-white/70 transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5 shrink-0"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 2.9a2 2 0 0 1-.4 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.4 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+            +47 966 82 910 (WhatsApp)
+          </a>
+          <a href="https://globaolena.com" target="_blank" rel="noopener" class="flex items-center gap-3 hover:text-white/70 transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5 shrink-0"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+            globaolena.com
+          </a>
+        </div>
+      </div>
+
+      <div class="fade-up" style="transition-delay:.06s">
+        <h3 class="font-display font-semibold text-lg">Languages</h3>
+        <div class="flex flex-wrap gap-2 mt-6">
+          <span class="px-4 py-2 rounded-full border border-white/25 text-xs">Ukrainian</span>
+          <span class="px-4 py-2 rounded-full border border-white/25 text-xs">Russian</span>
+          <span class="px-4 py-2 rounded-full border border-white/25 text-xs">English</span>
+          <span class="px-4 py-2 rounded-full border border-white/25 text-xs">Norwegian (basic)</span>
+        </div>
+        <p class="mt-6 text-sm text-white/60">Working remotely and on-site across Spain, Bulgaria, Northern Cyprus, Georgia and Thailand — video call or in person, whichever suits you.</p>
+      </div>
+
+      <div class="fade-up" style="transition-delay:.12s">
+        <h3 class="font-display font-semibold text-lg">Follow along</h3>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <a href="#" aria-label="Facebook" class="w-11 h-11 rounded-full border border-white/25 flex items-center justify-center font-display font-semibold hover:bg-white hover:text-ink transition-colors">f</a>
+          <a href="#" aria-label="Instagram" class="w-11 h-11 rounded-full border border-white/25 flex items-center justify-center hover:bg-white hover:text-ink transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="w-11 h-11 rounded-full border border-white/25 flex items-center justify-center text-xs font-display font-semibold hover:bg-white hover:text-ink transition-colors">in</a>
+          <a href="#" aria-label="YouTube" class="w-11 h-11 rounded-full border border-white/25 flex items-center justify-center hover:bg-white hover:text-ink transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 10l4 2-4 2z" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok" class="w-11 h-11 rounded-full border border-white/25 flex items-center justify-center hover:bg-white hover:text-ink transition-colors">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none" class="w-4 h-4"><path d="M14 3c.3 2 1.8 3.6 3.8 3.9v2.7c-1.4 0-2.7-.4-3.8-1.2v6.4a5.1 5.1 0 1 1-4.4-5v2.8a2.4 2.4 0 1 0 1.7 2.3V3h2.7z"/></svg>
+          </a>
+        </div>
+        <a href="#feedback" class="btn-primary bg-white !text-ink hover:bg-white/90 mt-8 w-fit">Book a Free Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-bgalt border-t border-line">
+  <div class="max-w-content mx-auto px-6 md:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+    <span>&copy; <span id="year"></span> Olena Globa. All rights reserved.</span>
+    <div class="flex gap-6">
+      <a href="#services" class="hover:text-ink transition-colors">Services</a>
+      <a href="#countries" class="hover:text-ink transition-colors">Countries</a>
+      <a href="#contact" class="hover:text-ink transition-colors">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuIconOpen = document.getElementById('menuIconOpen');
+  const menuIconClose = document.getElementById('menuIconClose');
+
+  function closeMobileMenu(){
+    mobileMenu.classList.add('hidden');
+    menuIconOpen.classList.remove('hidden');
+    menuIconClose.classList.add('hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  menuBtn.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    menuIconOpen.classList.toggle('hidden');
+    menuIconClose.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(isHidden));
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Scroll-triggered fade-ins
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Hero quick country selector
+  document.getElementById('countryGoBtn').addEventListener('click', () => {
+    const val = document.getElementById('countrySelect').value;
+    if (val) {
+      document.getElementById(val).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      document.getElementById('countries').scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // Testimonials slider
+  const track = document.getElementById('testiTrack');
+  const dots = [document.getElementById('dot0'), document.getElementById('dot1')];
+  let slideIndex = 0;
+
+  function updateSlider() {
+    track.style.transform = `translateX(-${slideIndex * 50}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === slideIndex));
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    slideIndex = (slideIndex - 1 + 2) % 2;
+    updateSlider();
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    slideIndex = (slideIndex + 1) % 2;
+    updateSlider();
+  });
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { slideIndex = i; updateSlider(); }));
+
+  // Feedback form (front-end only)
+  const feedbackForm = document.getElementById('feedbackForm');
+  const feedbackSuccess = document.getElementById('feedbackSuccess');
+  feedbackForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    feedbackForm.classList.add('hidden');
+    feedbackSuccess.classList.remove('hidden');
+    feedbackForm.reset();
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
