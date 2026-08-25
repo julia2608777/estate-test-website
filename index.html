@@ -15,16 +15,16 @@
       extend: {
         colors: {
           bg: '#ffffff',
-          bgalt: '#f5f5f3',
+          bgalt: '#f5efe2',
           surface: '#ffffff',
-          ink: '#111111',
-          inksoft: '#414141',
-          muted: '#737373',
-          mutedlight: '#a5a5a5',
-          line: '#cacaca',
-          accent: '#111111',
-          accentdark: '#000000',
-          accentlight: '#eeeeec',
+          ink: '#16233f',
+          inksoft: '#3e4c63',
+          muted: '#7a8699',
+          mutedlight: '#b3ab90',
+          line: '#e3d9c3',
+          accent: '#16233f',
+          accentdark: '#0d1626',
+          accentlight: '#efe6d2',
         },
         fontFamily: {
           display: ['"DM Sans"', 'sans-serif'],
@@ -39,18 +39,18 @@
 </script>
 <style>
   :root{
-    --primary:#111111;
+    --primary:#16233f;
     --white:#ffffff;
-    --light-gray:#a5a5a5;
-    --gray:#737373;
-    --black-border:#464646;
-    --border:#cacaca;
+    --light-gray:#b3ab90;
+    --gray:#7a8699;
+    --black-border:#16233f;
+    --border:#e3d9c3;
     --tablet-spacing:100px;
     --mobile-landscape-spacing:80px;
     --mobile-portrait-spacing:60px;
     --image-background:lightgrey;
     --desktop-spacing:150px;
-    --body-font:#414141;
+    --body-font:#3e4c63;
   }
   *{box-sizing:border-box;}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
@@ -92,8 +92,8 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .shadow-soft{ box-shadow: 0 1px 2px rgba(17,17,17,.04), 0 12px 32px -16px rgba(17,17,17,.18); }
-  .shadow-card:hover{ box-shadow: 0 20px 40px -20px rgba(17,17,17,.35); }
+  .shadow-soft{ box-shadow: 0 1px 2px rgba(22,35,63,.06), 0 12px 32px -16px rgba(22,35,63,.22); }
+  .shadow-card:hover{ box-shadow: 0 20px 40px -20px rgba(22,35,63,.4); }
 
   .text-divider{
     border-top:1px solid var(--border);
@@ -118,7 +118,7 @@
     font-size:.875rem;font-weight:600;letter-spacing:.02em;
     transition:background .25s ease, transform .25s ease;
   }
-  .btn-primary:hover{ background:#2b2b2b; transform:translateY(-1px); }
+  .btn-primary:hover{ background:#233258; transform:translateY(-1px); }
 
   .btn-outline{
     display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
@@ -146,9 +146,14 @@
   .dot{ width:8px;height:8px;border-radius:9999px;background:var(--border);transition:background .25s ease, width .25s ease; }
   .dot.active{ background:var(--primary); width:22px; }
 
-  input:focus, textarea:focus, select:focus{ outline:none; border-color:#111; box-shadow:0 0 0 3px rgba(17,17,17,.08); }
+  input:focus, textarea:focus, select:focus{ outline:none; border-color:#16233f; box-shadow:0 0 0 3px rgba(22,35,63,.12); }
 
   .stat-num{ font-variant-numeric: tabular-nums; }
+
+  .hero-min-h{ min-height:78vh; }
+  @supports (height: 100dvh){
+    .hero-min-h{ min-height:78dvh; }
+  }
 </style>
 </head>
 <body class="bg-bg text-inksoft antialiased">
@@ -189,33 +194,33 @@
 </header>
 
 <!-- ============ HERO ============ -->
-<section id="hero" class="relative min-h-[92vh] flex items-end overflow-hidden grain">
+<section id="hero" class="relative hero-min-h flex items-start overflow-hidden grain">
   <video class="absolute inset-0 w-full h-full object-cover object-top" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg">
     <source src="IMG_8166.MP4" type="video/mp4">
   </video>
-  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0d1626]/80 via-[#16233f]/40 to-[#16233f]/40"></div>
 
-  <div class="relative z-10 w-full min-w-0 max-w-content mx-auto px-6 md:px-10 pt-40 pb-14 text-white">
-    <div class="fade-up inline-flex items-center gap-3 bg-white/10 border border-white/25 rounded-full pl-1.5 pr-5 py-1.5 mb-8 backdrop-blur-sm">
+  <div class="relative z-10 w-full min-w-0 max-w-content mx-auto px-6 md:px-10 pt-10 sm:pt-12 md:pt-14 pb-10 sm:pb-14 text-white">
+    <div class="fade-up inline-flex items-center gap-3 bg-white/10 border border-white/25 rounded-full pl-1.5 pr-5 py-1.5 mb-5 sm:mb-8 backdrop-blur-sm">
       <img src="IMG_7992.JPG" alt="Olena Globa" class="w-9 h-9 rounded-full object-cover object-top">
       <span class="text-xs sm:text-sm font-medium tracking-wide">Olena Globa &middot; 25+ Years in Real Estate</span>
     </div>
 
-    <h1 class="fade-up font-display font-semibold text-[2.5rem] leading-[1.08] sm:text-6xl md:text-7xl max-w-3xl" style="transition-delay:.05s">
+    <h1 class="fade-up font-display font-semibold text-[2.1rem] leading-[1.1] sm:text-6xl md:text-7xl max-w-3xl" style="transition-delay:.05s">
       Find the country, the home, and the life that truly fit you.
     </h1>
 
-    <p class="fade-up mt-6 max-w-xl text-base sm:text-lg text-white/85" style="transition-delay:.12s">
+    <p class="fade-up mt-4 sm:mt-6 max-w-xl text-base sm:text-lg text-white/85" style="transition-delay:.12s">
       &ldquo;I help people not just buy real estate, but choose the country and lifestyle that truly match their needs and dreams.&rdquo;
     </p>
 
-    <div class="fade-up mt-9 flex flex-wrap gap-4" style="transition-delay:.18s">
+    <div class="fade-up mt-6 sm:mt-9 flex flex-wrap gap-4" style="transition-delay:.18s">
       <a href="#feedback" class="btn-primary bg-white !text-ink hover:bg-white/90">Book a Free Consultation</a>
       <a href="#countries" class="btn-outline-light">Explore Countries</a>
     </div>
 
     <!-- quick country selector -->
-    <div class="fade-up mt-10 max-w-xl bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-3 shadow-soft" style="transition-delay:.24s">
+    <div class="fade-up mt-6 sm:mt-10 max-w-xl bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-3 shadow-soft" style="transition-delay:.24s">
       <label class="sr-only" for="countrySelect">Where would you like to buy property?</label>
       <select id="countrySelect" class="flex-1 min-w-0 w-full text-ink text-sm sm:text-base rounded-xl border border-line px-4 py-3 bg-white">
         <option value="">Where would you like to buy property?</option>
@@ -228,21 +233,21 @@
       <button id="countryGoBtn" type="button" class="btn-primary whitespace-nowrap">View Market</button>
     </div>
 
-    <div class="fade-up mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl border-t border-white/20 pt-8" style="transition-delay:.3s">
+    <div class="fade-up mt-6 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl border-t border-white/20 pt-5 sm:pt-8" style="transition-delay:.3s">
       <div>
-        <div class="stat-num font-display text-3xl font-semibold">25+</div>
+        <div class="stat-num font-display text-2xl sm:text-3xl font-semibold">25+</div>
         <div class="text-xs sm:text-sm text-white/70 mt-1">Years of experience</div>
       </div>
       <div>
-        <div class="stat-num font-display text-3xl font-semibold">5</div>
+        <div class="stat-num font-display text-2xl sm:text-3xl font-semibold">5</div>
         <div class="text-xs sm:text-sm text-white/70 mt-1">Countries of operation</div>
       </div>
       <div>
-        <div class="stat-num font-display text-3xl font-semibold">4</div>
+        <div class="stat-num font-display text-2xl sm:text-3xl font-semibold">4</div>
         <div class="text-xs sm:text-sm text-white/70 mt-1">Languages spoken</div>
       </div>
       <div>
-        <div class="stat-num font-display text-3xl font-semibold">100%</div>
+        <div class="stat-num font-display text-2xl sm:text-3xl font-semibold">100%</div>
         <div class="text-xs sm:text-sm text-white/70 mt-1">Personal attention</div>
       </div>
     </div>
@@ -277,9 +282,9 @@
     </div>
 
     <div class="fade-up grid grid-cols-3 gap-4 mt-6 h-48 sm:h-64 md:h-80">
-      <img src="photos/IMG_8002.JPG" alt="Keys and investment documents at sunset by a modern home" class="w-full h-full object-cover object-top rounded-2xl">
-      <img src="photos/IMG_8003.JPG" alt="Modern residential towers at dusk" class="w-full h-full object-cover object-top rounded-2xl">
-      <img src="photos/IMG_8004.JPG" alt="A curated global property portfolio" class="w-full h-full object-cover object-top rounded-2xl">
+      <img src="photos/IMG_8433.JPG" alt="Modern residential complex at dusk" class="w-full h-full object-cover object-top rounded-2xl">
+      <img src="photos/IMG_8434.JPG" alt="Glass office towers at sunset" class="w-full h-full object-cover object-top rounded-2xl">
+      <img src="photos/IMG_8436.JPG" alt="Handing over the keys after a successful transaction" class="w-full h-full object-cover object-top rounded-2xl">
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
@@ -360,8 +365,8 @@
       <div class="fade-up order-2 md:order-1 flex flex-col justify-center text-divider px-6 md:pl-10 md:pr-12 py-12 md:py-0">
         <span class="text-xs font-semibold tracking-[0.18em] uppercase text-muted">About me</span>
         <h2 class="font-display font-semibold text-3xl sm:text-4xl text-ink mt-4">25+ years guiding people home</h2>
-        <p class="mt-4 text-inksoft">For many years, I managed a real estate agency in Ukraine, successfully guiding transactions across residential, commercial, and investment property. Today I work in the international market, collaborating with vetted developers and partners across different countries.</p>
-        <p class="mt-4 text-inksoft">I help clients not only find real estate, but also choose the country that best suits their goals and capabilities — because the right property only matters if it comes with the right life around it.</p>
+        <p class="mt-4 text-inksoft">For many years, I managed a <strong class="font-semibold text-ink">real estate agency in Ukraine</strong>, successfully guiding transactions across residential, commercial, and investment property. Today I work in the <strong class="font-semibold text-ink">international market</strong>, collaborating with vetted developers and partners across different countries.</p>
+        <p class="mt-4 text-inksoft">I help clients not only find real estate, but also <strong class="font-semibold text-ink">choose the country</strong> that best suits their goals and capabilities — because the right property only matters if it comes with <strong class="font-semibold text-ink">the right life</strong> around it.</p>
 
         <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-line">
           <div>
@@ -472,16 +477,16 @@
         <p class="mt-3 text-inksoft text-sm sm:text-base">My goal is to make buying real estate abroad as simple, safe, and comfortable as possible — with professional guidance at every stage.</p>
 
         <ol class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mt-8 text-sm">
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">01</span><span><span class="font-semibold text-ink block">Initial consultation</span>Goals, budget, and preferences.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">02</span><span><span class="font-semibold text-ink block">Country &amp; region selection</span>Matched to your plans.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">03</span><span><span class="font-semibold text-ink block">Property selection</span>Curated from vetted partners.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">04</span><span><span class="font-semibold text-ink block">Presentation &amp; comparison</span>Clear pros and cons.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">01</span><span><span class="font-semibold text-ink block">Initial consultation</span>Goals &amp; budget.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">02</span><span><span class="font-semibold text-ink block">Country &amp; region selection</span>Matched to you.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">03</span><span><span class="font-semibold text-ink block">Property selection</span>Vetted partners.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">04</span><span><span class="font-semibold text-ink block">Presentation &amp; comparison</span>Compare options.</span></li>
           <li class="flex gap-3"><span class="font-display font-semibold text-muted">05</span><span><span class="font-semibold text-ink block">Viewings</span>Online or in person.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">06</span><span><span class="font-semibold text-ink block">Legal due diligence</span>With trusted local lawyers.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">07</span><span><span class="font-semibold text-ink block">Negotiation &amp; reservation</span>Best price and terms.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">08</span><span><span class="font-semibold text-ink block">Transaction support</span>Contracts, payments, registration.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">09</span><span><span class="font-semibold text-ink block">Handover</span>Documents and keys, together.</span></li>
-          <li class="flex gap-3"><span class="font-display font-semibold text-muted">10</span><span><span class="font-semibold text-ink block">After-sales support</span>Furnishing, rental, relocation.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">06</span><span><span class="font-semibold text-ink block">Legal due diligence</span>Trusted lawyers.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">07</span><span><span class="font-semibold text-ink block">Negotiation &amp; reservation</span>Best terms.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">08</span><span><span class="font-semibold text-ink block">Transaction support</span>Contracts &amp; payments.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">09</span><span><span class="font-semibold text-ink block">Handover</span>Keys in hand.</span></li>
+          <li class="flex gap-3"><span class="font-display font-semibold text-muted">10</span><span><span class="font-semibold text-ink block">After-sales support</span>Furnishing &amp; rental.</span></li>
         </ol>
       </div>
       <div class="fade-up md:relative md:h-[640px]" style="transition-delay:.08s">
@@ -568,7 +573,7 @@
   <div class="max-w-content mx-auto px-6 md:px-10">
     <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
       <div class="fade-up h-64 lg:h-auto">
-        <img src="photos/IMG_8001.JPG" alt="Consultation desk with property plans and financial charts" class="w-full h-full object-cover object-top rounded-2xl">
+        <img src="IMG_8449.JPG" alt="Olena Globa reviewing property listings with a client" class="w-full h-full object-cover object-top rounded-2xl">
       </div>
 
       <div class="fade-up flex flex-col justify-center text-divider py-10" style="transition-delay:.08s">
